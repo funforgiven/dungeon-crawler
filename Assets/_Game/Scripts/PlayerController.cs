@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
     private float _inputHorizontal;
     private float _inputVertical;
     private Rigidbody2D _rb;
-    
-    void Start()
+
+    private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-    
-    void Update()
+
+    private void Update()
     {
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
