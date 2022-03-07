@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private GameObject _player;
-    private Rigidbody2D _rb;
+    private Transform _target;
+    private NavMeshAgent _agent;
     private bool _isShooting = false;
 
     [SerializeField] private float walkSpeed = 2f;
@@ -15,25 +16,28 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindWithTag("Player");
-        _rb = GetComponent<Rigidbody2D>();
+        _target = GameObject.FindWithTag("Player").transform;
+        
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var distanceToPlayer = Vector2.Distance(_player.transform.position, transform.position);
+        var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
         if (!_isShooting)
         {
             if (distanceToPlayer <= chaseRange)
             {
-                _rb.velocity = Vector2.zero;
+                _agent.isStopped = true;
+                _agent.ResetPath();
                 _isShooting = true;
             }
             else
             {
-                var direction = (_player.transform.position - transform.position).normalized;
-                _rb.velocity = direction * walkSpeed;
+                _agent.SetDestination(_target.position);
             }
             
         }
