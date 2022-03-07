@@ -8,8 +8,7 @@ public class Enemy : MonoBehaviour
     private Transform _target;
     private NavMeshAgent _agent;
     private bool _isShooting = false;
-
-    [SerializeField] private float walkSpeed = 2f;
+    
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float shootRange = 7f;
     

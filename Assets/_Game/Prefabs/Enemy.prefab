@@ -137,6 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e302f475961794186d031a3d8940ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
-  chaseRange: 5
-  shootRange: 7
+  chaseRange: 3
+  shootRange: 5
