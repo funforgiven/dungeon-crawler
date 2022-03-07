@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Vector2 spawnPosition;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SpawnPlayer();
     }
