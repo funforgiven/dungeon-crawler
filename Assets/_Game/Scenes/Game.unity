@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 310328792}
   - component: {fileID: 310328791}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Navmesh2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_UseGeometry: 1
   m_OverrideByGrid: 0
   m_UseMeshPrefab: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 2039123356}
   - component: {fileID: 2039123355}
   - component: {fileID: 2039123354}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
