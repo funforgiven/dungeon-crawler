@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float shootRange = 7f;
+
+    [SerializeField] private float maxHealth = 100;
+    private float _health;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,8 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+
+        _health = maxHealth;
     }
 
     // Update is called once per frame
@@ -45,5 +50,13 @@ public class Enemy : MonoBehaviour
             if (distanceToPlayer > shootRange)
                 _isShooting = false;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
+        
+        if(_health <= 0)
+            Destroy(gameObject);
     }
 }
