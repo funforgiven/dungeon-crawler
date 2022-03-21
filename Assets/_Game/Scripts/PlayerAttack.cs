@@ -18,6 +18,5 @@ public class PlayerAttack : MonoBehaviour
         {
             currentWeapon.GetComponent<Activatable>().Activate(this.gameObject);
         }
-        
     }
 }
