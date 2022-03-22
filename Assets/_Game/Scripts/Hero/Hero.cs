@@ -11,6 +11,7 @@ public class Hero : MonoBehaviour, IDamageable
     private float _inputVertical;
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
@@ -22,6 +23,7 @@ public class Hero : MonoBehaviour, IDamageable
         
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
@@ -43,6 +45,8 @@ public class Hero : MonoBehaviour, IDamageable
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);
         _rigidbody.velocity = velocity.normalized * walkSpeed;
+
+        _animator.SetBool("Move", Mathf.Abs(velocity.magnitude) > 0);
 
         if (velocity.x < 0)
             _spriteRenderer.flipX = true;

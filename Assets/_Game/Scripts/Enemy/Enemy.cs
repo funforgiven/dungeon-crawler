@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     private Transform _transform;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [SerializeField] protected float chaseRange = 5f;
     [SerializeField] protected float shootRange = 7f;
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _transform = transform;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour, IDamageable
     protected virtual void Update()
     {
         _spriteRenderer.flipX = _transform.position.x < _target.position.x;
+        _animator.SetBool("Move", _agent.velocity.magnitude > 0);
         
         var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
         if (!_isShooting)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6221453295688178184}
   - component: {fileID: 6371360691702374922}
   - component: {fileID: -5934543081586126164}
+  - component: {fileID: 377032282315102451}
   m_Layer: 7
   m_Name: Imp
   m_TagString: Untagged
@@ -151,3 +152,24 @@ MonoBehaviour:
   shootRange: 7
   maxHealth: 100
   fireball: {fileID: 6193219432356453055, guid: 17a8ce8788d72864f869fbd17f90f6c5, type: 3}
+  fireRate: 20
+--- !u!95 &377032282315102451
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6371360691702374924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 284a96d1be912bb4bb95e02f24994c4c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

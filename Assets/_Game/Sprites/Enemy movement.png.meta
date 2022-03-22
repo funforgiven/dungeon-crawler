@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -3108,23 +3108,23 @@ TextureImporter:
       Enemy movement_74: 1873163721
       Enemy movement_80: 963292092
       Enemy movement_131: 1498417172
-      Enemy movement_102: -2085776373
+      Enemy movement_108: 1551329437
       Enemy movement_20: -1115383945
+      Enemy movement_30: -1579326617
       Enemy movement_51: -43037548
+      Enemy movement_102: -2085776373
       Enemy movement_40: 7512218
       Enemy movement_64: -1566761177
+      Enemy movement_138: -1479378881
       Enemy movement_13: 631737533
       Enemy movement_84: -702425630
-      Enemy movement_138: -1479378881
-      Enemy movement_30: -1579326617
-      Enemy movement_23: -521158796
       Enemy movement_63: -312324338
+      Enemy movement_23: -521158796
       Enemy movement_18: -818325297
       Enemy movement_107: -143815907
       Enemy movement_127: -415519919
       Enemy movement_36: 1071594669
       Enemy movement_52: 721461799
-      Enemy movement_108: 1551329437
       Enemy movement_16: -152812327
       Enemy movement_12: 1815959718
       Enemy movement_94: 749732300

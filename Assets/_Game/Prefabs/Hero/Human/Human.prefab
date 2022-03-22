@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2134701723311111042}
   - component: {fileID: 128004969411625495}
   - component: {fileID: 8144324551934026997}
+  - component: {fileID: 8622181827487841733}
   m_Layer: 6
-  m_Name: Hero
+  m_Name: Human
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,3 +150,23 @@ MonoBehaviour:
   currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
   walkSpeed: 4
   maxHealth: 100
+--- !u!95 &8622181827487841733
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128004969411625493}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 174ea05234590b344a4c6121777a24c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
