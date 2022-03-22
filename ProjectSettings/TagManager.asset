@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - Hero
   - Enemy
-  - Player Attack
-  - Enemy Attack
+  - Projectile
+  - Environment
   - 
   - 
   - 

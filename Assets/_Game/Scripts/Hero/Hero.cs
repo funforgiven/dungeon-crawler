@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Hero : MonoBehaviour, IDamageable
 {
     [Header("Attack")]
     [SerializeField] private GameObject currentWeapon;
@@ -49,7 +49,7 @@ public class Hero : MonoBehaviour
         else if (velocity.x > 0)
             _spriteRenderer.flipX = false;
     }
-    
+
     public void TakeDamage(float damage)
     {
         _health -= damage;

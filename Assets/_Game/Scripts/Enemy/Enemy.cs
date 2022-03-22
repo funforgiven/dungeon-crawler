@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("Agent")]
     protected NavMeshAgent _agent;
@@ -17,8 +17,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         _target = GameObject.FindWithTag("Player").transform;
@@ -32,9 +31,8 @@ public class Enemy : MonoBehaviour
 
         _health = maxHealth;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    protected virtual void Update()
     {
         _spriteRenderer.flipX = _transform.position.x < _target.position.x;
         
@@ -58,23 +56,15 @@ public class Enemy : MonoBehaviour
             if (distanceToPlayer > shootRange)
             {
                 _isShooting = false;
-                Attack();
             }
-
         }
-        
     }
-    
+
     public void TakeDamage(float damage)
     {
         _health -= damage;
         
         if(_health <= 0)
             Destroy(gameObject);
-    }
-
-    protected virtual void Attack()
-    {
-        Debug.Log("Attack");    
     }
 }
