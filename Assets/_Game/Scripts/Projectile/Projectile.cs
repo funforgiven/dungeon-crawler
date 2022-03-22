@@ -10,13 +10,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float damage;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        var player = col.GetComponent<PlayerStats>();
-        if (player)
+        var hero = col.GetComponent<Hero>();
+        if (hero)
         {
-            player.TakeDamage(damage);
+            hero.TakeDamage(damage);
             Destroy(gameObject);
         }
-
-
     }
 }

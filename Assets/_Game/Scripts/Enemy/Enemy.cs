@@ -1,54 +1,55 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    protected Transform Target;
+    [Header("Agent")]
+    protected NavMeshAgent _agent;
+    protected bool _isShooting = false;
+    protected float _health;
+    protected Transform _target;
     
     private Transform _transform;
     private SpriteRenderer _spriteRenderer;
     
-    protected NavMeshAgent Agent;
-    protected bool IsShooting = false;
-    protected float Health;
-    
     [SerializeField] protected float chaseRange = 5f;
     [SerializeField] protected float shootRange = 7f;
 
+    [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
 
     // Start is called before the first frame update
     void Start()
     {
-        Target = GameObject.FindWithTag("Player").transform;
+        _target = GameObject.FindWithTag("Player").transform;
 
         _transform = transform;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         
-        Agent = GetComponent<NavMeshAgent>();
-        Agent.updateRotation = false;
-        Agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
 
-        Health = maxHealth;
+        _health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _spriteRenderer.flipX = _transform.position.x < Target.position.x;
+        _spriteRenderer.flipX = _transform.position.x < _target.position.x;
         
-        var distanceToPlayer = Vector2.Distance(Target.position, transform.position);
-        if (!IsShooting)
+        var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
+        if (!_isShooting)
         {
             if (distanceToPlayer <= chaseRange)
             {
-                Agent.isStopped = true;
-                Agent.ResetPath();
-                IsShooting = true;
+                _agent.isStopped = true;
+                _agent.ResetPath();
+                _isShooting = true;
             }
             else
             {
-                Agent.SetDestination(Target.position);
+                _agent.SetDestination(_target.position);
             }
             
         }
@@ -56,7 +57,7 @@ public abstract class Enemy : MonoBehaviour
         {
             if (distanceToPlayer > shootRange)
             {
-                IsShooting = false;
+                _isShooting = false;
                 Attack();
             }
 
@@ -66,11 +67,14 @@ public abstract class Enemy : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        _health -= damage;
         
-        if(Health <= 0)
+        if(_health <= 0)
             Destroy(gameObject);
     }
 
-    protected abstract void Attack();
+    protected virtual void Attack()
+    {
+        Debug.Log("Attack");    
+    }
 }

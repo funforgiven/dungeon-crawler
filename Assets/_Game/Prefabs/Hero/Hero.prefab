@@ -12,11 +12,9 @@ GameObject:
   - component: {fileID: 128004969411625488}
   - component: {fileID: 2134701723311111042}
   - component: {fileID: 128004969411625495}
-  - component: {fileID: 128004969411625494}
   - component: {fileID: 8144324551934026997}
-  - component: {fileID: 7992849490530378474}
   m_Layer: 6
-  m_Name: Player
+  m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,19 +134,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &128004969411625494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128004969411625493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b1af655b62d984c91d5803a7b7ae2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 4
 --- !u!114 &8144324551934026997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,16 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
---- !u!114 &7992849490530378474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128004969411625493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0705d54325b20094288d733185b58ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  walkSpeed: 4
   maxHealth: 100

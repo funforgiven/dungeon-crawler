@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sword : Activatable
+public class Sword : Weapon
 {
     [SerializeField] private float swingAngle = 90f;
     [SerializeField] private float swingDuration = 1f;
@@ -18,7 +18,7 @@ public class Sword : Activatable
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    public override void Activate(GameObject activator)
+    public override void Attack(GameObject owner)
     {
         if(_canSwing)
             StartCoroutine(Swing());

@@ -13,7 +13,7 @@ public class Imp : Enemy
     private void CastFireball()
     {
         var projectile = Instantiate(fireball, transform.position, quaternion.identity);
-        var velocity = (Target.position - projectile.transform.position).normalized * projectile.GetComponent<Projectile>().speed;
+        var velocity = (_target.position - projectile.transform.position).normalized * projectile.GetComponent<Projectile>().speed;
         projectile.GetComponent<Rigidbody2D>().velocity = velocity;
 
     }
