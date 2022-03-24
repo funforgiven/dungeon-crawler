@@ -59,9 +59,12 @@ public class Hero : MonoBehaviour, IDamageable
     {
         _health -= damage;
 
-        if (_health > 0) return;
+        if (_health > 0) OnDeath(damager);
+    }
 
-        GameManager.Instance.StartGame(damager.GetComponent<Enemy>().hero);
+    public void OnDeath(GameObject killer)
+    {
+        GameManager.Instance.StartGame(killer.GetComponent<Enemy>().hero);
         Destroy(gameObject);
     }
 }

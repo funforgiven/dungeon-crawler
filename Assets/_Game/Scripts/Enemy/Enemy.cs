@@ -70,7 +70,12 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         _health -= damage;
         
-        if(_health <= 0)
-            Destroy(gameObject);
+        if(_health <= 0) OnDeath(damager);
     }
+
+    public void OnDeath(GameObject killer)
+    {
+        Destroy(gameObject);
+    }
+    
 }
