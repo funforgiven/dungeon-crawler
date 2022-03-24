@@ -5,9 +5,9 @@ using UnityEngine;
     
 public class Event : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject enemyPrefab;
-
-    public List<GameObject> Enemies;
+    [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private int enemyCount;
+    [HideInInspector] public List<GameObject> Enemies;
 
     private bool _isInteractable = true;
 
@@ -16,9 +16,14 @@ public class Event : MonoBehaviour, IInteractable
     {
         if (!_isInteractable) return;
         _isInteractable = false;
-        var _enemy = Instantiate(enemyPrefab, transform.position - new Vector3(0, 7, 0), Quaternion.identity);
-        Enemies.Add(_enemy);
-        _enemy.GetComponent<Enemy>()._event = this;
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            var _enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform.position - new Vector3(0, 7, 0), Quaternion.identity);
+            Enemies.Add(_enemy);
+            _enemy.GetComponent<Enemy>()._event = this;
+        }
+
     }
 
     public void OnEventEnd()
