@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sword : Weapon
@@ -18,7 +15,7 @@ public class Sword : Weapon
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    public override void Attack(GameObject owner)
+    public override void Attack()
     {
         if(_canSwing)
             StartCoroutine(Swing());
@@ -53,7 +50,7 @@ public class Sword : Weapon
     private void OnTriggerEnter2D(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        if(enemy) enemy.TakeDamage(damage);
+        if(enemy) enemy.TakeDamage(damage, owner);
             
     }
 }

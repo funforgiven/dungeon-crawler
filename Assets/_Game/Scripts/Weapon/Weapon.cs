@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public abstract void Attack(GameObject attacker);
+    public GameObject owner;
+    public abstract void Attack();
 }

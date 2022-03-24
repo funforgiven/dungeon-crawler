@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
+
+    [Header("Hero")] 
+    [SerializeField] public GameObject hero;
     
     void Start()
     {
@@ -63,7 +66,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject damager)
     {
         _health -= damage;
         

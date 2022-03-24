@@ -27,6 +27,7 @@ public class Hero : MonoBehaviour, IDamageable
         
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
+        currentWeapon.GetComponent<Weapon>().owner = gameObject;
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class Hero : MonoBehaviour, IDamageable
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            currentWeapon.GetComponent<Weapon>().Attack(this.gameObject);
+            currentWeapon.GetComponent<Weapon>().Attack();
         }
     }
     
@@ -54,11 +55,13 @@ public class Hero : MonoBehaviour, IDamageable
             _spriteRenderer.flipX = false;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject damager)
     {
         _health -= damage;
-        
-        if(_health <= 0)
-            Destroy(gameObject);
+
+        if (_health > 0) return;
+
+        GameManager.Instance.StartGame(damager.GetComponent<Enemy>().hero);
+        Destroy(gameObject);
     }
 }

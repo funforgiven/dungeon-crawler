@@ -19,6 +19,7 @@ public class Imp : Enemy
             _fireballTimeElapsed = 0;
             
             var projectile = Instantiate(fireball).GetComponent<Projectile>();
+            projectile.owner = gameObject;
             StartCoroutine(projectile.Move(transform.position, _target.position));
         }
     }

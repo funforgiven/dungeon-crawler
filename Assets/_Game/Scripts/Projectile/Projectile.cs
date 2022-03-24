@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask layersToDamage;
+
+    public GameObject owner;
     
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -47,6 +49,6 @@ public class Projectile : MonoBehaviour
 
     void ApplyDamage(IDamageable damageable)
     {
-        damageable.TakeDamage(damage);
+        damageable.TakeDamage(damage, owner);
     }
 }

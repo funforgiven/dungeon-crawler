@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  damage: 5
+  damage: 25
   radius: 2
   layersToDamage:
     serializedVersion: 2
     m_Bits: 64
+  owner: {fileID: 0}
