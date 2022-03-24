@@ -51,6 +51,5 @@ public class Sword : Weapon
     {
         var enemy = col.GetComponent<Enemy>();
         if(enemy) enemy.TakeDamage(damage, owner);
-            
     }
 }

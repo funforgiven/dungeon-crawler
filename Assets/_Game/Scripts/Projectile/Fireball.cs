@@ -65,6 +65,7 @@ public class Fireball : MonoBehaviour
 
     void ApplyDamage(float damageToDeal, IDamageable damageable)
     {
+        if (damageable == null) return;
         damageable.TakeDamage(damageToDeal, owner);
     }
 }
