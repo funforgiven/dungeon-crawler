@@ -16,10 +16,10 @@ public class Imp : Enemy
         if (_isShooting && _fireballTimeElapsed > 60 / fireRate)
         {
             _fireballTimeElapsed = 0;
-            
-            var projectile = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<Fireball>();
-            projectile.owner = gameObject;
-            projectile.target = _target;
+
+            var fireballSpawned = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<Fireball>();
+            fireballSpawned.owner = gameObject;
+            fireballSpawned.target = _target;
         }
     }
     

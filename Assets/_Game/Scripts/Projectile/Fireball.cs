@@ -15,22 +15,19 @@ public class Fireball : MonoBehaviour
 
     private Animator _animator;
     private bool _explode = false;
-    private bool _initialized = false;
     private bool _startedMoving = false;
 
     private float _chargeTimeElapsed = 0;
 
 
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        owner.GetComponent<Enemy>()._agent.enabled = false;
+    }
     private void Update()
     {
-        if (!owner) return;
-        
-        if (!_initialized)
-        {
-            _animator = GetComponent<Animator>();
-            owner.GetComponent<Enemy>()._agent.enabled = false;
-            _initialized = true;
-        }
+        if (!owner) Destroy(gameObject);
 
         _chargeTimeElapsed += Time.deltaTime;
 
