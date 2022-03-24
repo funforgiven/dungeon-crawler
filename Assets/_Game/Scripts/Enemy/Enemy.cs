@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("Agent")]
-    protected NavMeshAgent _agent;
+    [HideInInspector] public NavMeshAgent _agent;
     protected bool _isShooting = false;
     protected float _health;
     protected Transform _target;
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour, IDamageable
     protected virtual void Update()
     {
         _spriteRenderer.flipX = _transform.position.x < _target.position.x;
-        _animator.SetBool("Move", _agent.velocity.magnitude > 0);
+        //_animator.SetBool("Move", _agent.velocity.magnitude > 0);
         
         var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
         if (!_isShooting)

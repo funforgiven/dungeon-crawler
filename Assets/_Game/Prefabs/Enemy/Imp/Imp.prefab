@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea0c9b9df843934ebb3fd014da8b651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 0}
   chaseRange: 5
   shootRange: 7
   maxHealth: 100

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Imp : Enemy
 {
@@ -18,9 +17,9 @@ public class Imp : Enemy
         {
             _fireballTimeElapsed = 0;
             
-            var projectile = Instantiate(fireball).GetComponent<Fireball>();
+            var projectile = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<Fireball>();
             projectile.owner = gameObject;
-            projectile.Move(transform.position, _target.transform.position);
+            projectile.target = _target;
         }
     }
     
