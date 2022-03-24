@@ -8,7 +8,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask layersToDamage;
 
-    public GameObject owner;
+    [HideInInspector] public GameObject owner;
+
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -44,7 +51,7 @@ public class Projectile : MonoBehaviour
             ApplyDamage(col.GetComponent<IDamageable>());
         }
         
-        Destroy(gameObject);
+        _animator.SetBool("Explode", true);
     }
 
     void ApplyDamage(IDamageable damageable)
