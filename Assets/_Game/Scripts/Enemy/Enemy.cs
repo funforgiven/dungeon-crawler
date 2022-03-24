@@ -80,8 +80,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_event != null)
         {
-            _event.Enemies.Remove(gameObject);
-            if(_event.Enemies.Count == 0)
+            _event.enemies.Remove(gameObject);
+            if(_event.enemies.Count == 0)
                 _event.OnEventEnd();
         }
         

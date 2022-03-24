@@ -7,7 +7,7 @@ public class Event : MonoBehaviour, IInteractable
 {
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private int enemyCount;
-    [HideInInspector] public List<GameObject> Enemies;
+    [HideInInspector] public List<GameObject> enemies;
 
     private bool _isInteractable = true;
 
@@ -20,7 +20,7 @@ public class Event : MonoBehaviour, IInteractable
         for (int i = 0; i < enemyCount; i++)
         {
             var _enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform.position - new Vector3(0, 7, 0), Quaternion.identity);
-            Enemies.Add(_enemy);
+            enemies.Add(_enemy);
             _enemy.GetComponent<Enemy>()._event = this;
         }
 
