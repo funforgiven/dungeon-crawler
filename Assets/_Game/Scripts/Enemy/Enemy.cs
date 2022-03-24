@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Hero")] 
     [SerializeField] public GameObject hero;
+
+    [Header("Event")] 
+    public Event _event = null;
     
     void Start()
     {
@@ -75,6 +78,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void OnDeath(GameObject killer)
     {
+        if (_event != null)
+        {
+            
+        }
+        
         Destroy(gameObject);
     }
     
