@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1832788786936540251}
   - component: {fileID: -151646173870903830}
   - component: {fileID: -1241497258727497133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2044544332, guid: e7a0c96dad1da024c993f60d5d3785b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -168,3 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bca8690097592842b45b2308a589e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 0}
+  chaseRange: 5
+  shootRange: 7
+  maxHealth: 100
+  hero: {fileID: 0}
+  _event: {fileID: 0}

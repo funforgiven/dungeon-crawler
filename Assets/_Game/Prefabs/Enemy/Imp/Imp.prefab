@@ -153,6 +153,7 @@ MonoBehaviour:
   shootRange: 7
   maxHealth: 100
   hero: {fileID: 3063979139153698202, guid: de28ad9116ef38847ab1bdc89a26477f, type: 3}
+  _event: {fileID: 0}
   fireball: {fileID: 6193219432356453055, guid: 17a8ce8788d72864f869fbd17f90f6c5, type: 3}
   fireRate: 20
 --- !u!95 &377032282315102451

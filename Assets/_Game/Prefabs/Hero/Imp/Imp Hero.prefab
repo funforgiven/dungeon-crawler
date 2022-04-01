@@ -147,6 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec21d8d90ea6b44ead3e41e17fb7ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  critRate: 0
+  critDamage: 200
+  walkSpeed: 4
+  maxHealth: 100
 --- !u!95 &5395373557877985562
 Animator:
   serializedVersion: 4

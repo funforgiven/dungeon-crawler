@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
+  critRate: 0
+  critDamage: 200
   walkSpeed: 4
   maxHealth: 100
 --- !u!95 &8622181827487841733

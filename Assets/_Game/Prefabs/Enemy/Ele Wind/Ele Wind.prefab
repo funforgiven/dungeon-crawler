@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6286152635319395402}
   - component: {fileID: 6783842627027697018}
   - component: {fileID: -5878525371330916115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ele Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1920070918, guid: e7a0c96dad1da024c993f60d5d3785b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
