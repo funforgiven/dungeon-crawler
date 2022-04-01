@@ -5,8 +5,7 @@ public class Sword : Weapon
 {
     [SerializeField] private float swingAngle = 90f;
     [SerializeField] private float swingDuration = 1f;
-    [SerializeField] private float damage = 10f;
-    
+
     private bool _canSwing = true;
 
     private void Start()
@@ -50,6 +49,6 @@ public class Sword : Weapon
     private void OnTriggerEnter2D(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        if(enemy) enemy.TakeDamage(damage, owner);
+        if(enemy) ApplyDamage(col.GetComponent<Enemy>());
     }
 }

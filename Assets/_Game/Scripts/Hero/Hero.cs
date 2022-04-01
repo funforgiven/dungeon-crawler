@@ -4,6 +4,8 @@ public class Hero : MonoBehaviour, IDamageable
 {
     [Header("Attack")]
     [SerializeField] private GameObject currentWeapon;
+    [SerializeField] public float critRate = 0f;
+    [SerializeField] public float critDamage = 200f;
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 4f;
@@ -27,7 +29,7 @@ public class Hero : MonoBehaviour, IDamageable
         
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
-        currentWeapon.GetComponent<Weapon>().owner = gameObject;
+        currentWeapon.GetComponent<Weapon>().owner = this;
     }
 
     // Update is called once per frame
