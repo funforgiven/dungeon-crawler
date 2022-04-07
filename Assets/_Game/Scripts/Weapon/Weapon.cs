@@ -19,4 +19,16 @@ public abstract class Weapon : MonoBehaviour
         else
             enemy.TakeDamage(damage, owner.gameObject);
     }
+
+    public void Enable()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void Disable()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
 }

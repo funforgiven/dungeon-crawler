@@ -3,15 +3,15 @@ using UnityEngine;
 public class Hero : MonoBehaviour, IDamageable
 {
     [Header("Attack")]
-    [SerializeField] private GameObject currentWeapon;
+    [SerializeField] protected GameObject currentWeapon;
     [SerializeField] public float critRate = 0f;
     [SerializeField] public float critDamage = 200f;
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 4f;
-    private float _inputHorizontal;
-    private float _inputVertical;
-    private Rigidbody2D _rigidbody;
+    protected float _inputHorizontal;
+    protected float _inputVertical;
+    protected Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     
@@ -33,7 +33,7 @@ public class Hero : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
@@ -44,12 +44,12 @@ public class Hero : MonoBehaviour, IDamageable
         }
     }
     
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);
         _rigidbody.velocity = velocity.normalized * walkSpeed;
 
-        _animator.SetBool("Move", Mathf.Abs(velocity.magnitude) > 0);
+        _animator.SetBool("Move", velocity.magnitude > 0);
 
         if (velocity.x < 0)
             _spriteRenderer.flipX = true;
