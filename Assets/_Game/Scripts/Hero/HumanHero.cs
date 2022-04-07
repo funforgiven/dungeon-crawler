@@ -99,8 +99,10 @@ public class HumanHero : Hero
     {
         base.FixedUpdate();
 
-        if (_dashState == DashState.Dashing || _stabState == StabState.Stabbing)
+        if (_dashState == DashState.Dashing)
             _rigidbody.velocity = _savedVelocity.normalized * dashSpeed;
+        else if(_stabState == StabState.Stabbing)
+            _rigidbody.velocity = _savedVelocity.normalized * stabSpeed;
     }
 }
 
