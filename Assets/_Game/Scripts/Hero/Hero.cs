@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour, IDamageable
 {
@@ -14,19 +15,21 @@ public class Hero : MonoBehaviour, IDamageable
     protected Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    
+
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
     private float _health;
-        
+    private Slider healthBar;
+
     private void Start()
     {
         _health = maxHealth;
-        
+        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>();
+
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        
+
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
         currentWeapon.GetComponent<Weapon>().owner = this;
@@ -35,15 +38,16 @@ public class Hero : MonoBehaviour, IDamageable
     // Update is called once per frame
     protected virtual void Update()
     {
+      healthBar.value = _health / maxHealth;
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             currentWeapon.GetComponent<Weapon>().Attack();
         }
     }
-    
+
     protected virtual void FixedUpdate()
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);
