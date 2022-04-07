@@ -125,5 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: da34ea58bfb247a4881e3066e81f91bb, type: 3}
+  image: {fileID: 6673527278080905776, guid: 21affd32db0ebd448b54ec6c56f79ed1, type: 3}
   critRateIncrease: 50
