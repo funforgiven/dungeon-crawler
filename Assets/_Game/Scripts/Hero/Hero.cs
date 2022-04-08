@@ -22,18 +22,17 @@ public class Hero : MonoBehaviour, IDamageable
     private float _health;
     private Slider healthBar;
 
-    [Header("UI")]
+    [Header("UI")] 
     [SerializeField] private GameObject userInterface;
 
     protected virtual void Start()
     {
-      Instantiate(userInterface);
+      	Instantiate(userInterface);
+		healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
+		
         _health = maxHealth;
-		      walkSpeed = defaultWalkSpeed;
-          
-
-        healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
-
+		walkSpeed = defaultWalkSpeed;
+        
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -41,14 +40,12 @@ public class Hero : MonoBehaviour, IDamageable
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
         currentWeapon.GetComponent<Weapon>().owner = this;
-
-
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-      healthBar.value = _health / maxHealth;
+        //healthBar.value = _health / maxHealth;
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -57,7 +54,7 @@ public class Hero : MonoBehaviour, IDamageable
             currentWeapon.GetComponent<Weapon>().Attack();
         }
     }
-
+    
     protected virtual void FixedUpdate()
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);

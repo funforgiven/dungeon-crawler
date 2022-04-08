@@ -15,11 +15,11 @@ TagManager:
   - UI
   - Hero
   - Enemy
-  - Projectile
+  - EnemyProjectile
   - Environment
   - Weapon
   - Interactable
-  - 
+  - HeroProjectile
   - 
   - 
   - 

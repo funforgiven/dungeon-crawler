@@ -13,6 +13,11 @@ public class ImpHero : Hero
     private bool _fireballOnCooldown = false;
     private float _fireballCurrentCooldown = 0f;
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     protected override void Update()
     {
         base.Update();
