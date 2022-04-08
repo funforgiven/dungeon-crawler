@@ -165,6 +165,12 @@ MonoBehaviour:
   flameBarrierDamageLayer:
     serializedVersion: 2
     m_Bits: 128
+  bigFireballCooldown: 5
+  bigFireballDamage: 50
+  bigFireballDamageRadius: 3
+  bigFireballDamageLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &5395373557877985562
 Animator:
   serializedVersion: 4

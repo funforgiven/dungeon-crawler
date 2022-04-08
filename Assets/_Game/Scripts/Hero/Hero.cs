@@ -10,6 +10,7 @@ public class Hero : MonoBehaviour, IDamageable
 
     [Header("Movement")]
     [SerializeField] protected float defaultWalkSpeed = 4f;
+    [SerializeField] protected GameObject sprint;
     protected float walkSpeed;
     protected float _inputHorizontal;
     protected float _inputVertical;
@@ -19,6 +20,9 @@ public class Hero : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float healthRegen = 1f;
+    [SerializeField] private float healthRegenCooldown = 3f;
+    private float _healthRegenCurrentCooldown = 0f;
     protected float _health;
     private Slider healthBar;
 
@@ -53,6 +57,13 @@ public class Hero : MonoBehaviour, IDamageable
         {
             currentWeapon.GetComponent<Weapon>().Attack();
         }
+        
+        _healthRegenCurrentCooldown += Time.deltaTime;
+
+        if (_healthRegenCurrentCooldown > healthRegenCooldown)
+        {
+            _health += Time.deltaTime * healthRegen;
+        }
     }
     
     protected virtual void FixedUpdate()
@@ -63,15 +74,22 @@ public class Hero : MonoBehaviour, IDamageable
         _animator.SetBool("Move", velocity.magnitude > 0);
 
         if (velocity.x < 0)
+        {
             _spriteRenderer.flipX = true;
+            sprint.GetComponent<SpriteRenderer>().flipX = true;
+        }
         else if (velocity.x > 0)
+        {
             _spriteRenderer.flipX = false;
+            sprint.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     public virtual void TakeDamage(float damage, GameObject damager)
     {
         _health -= damage;
-
+        _healthRegenCurrentCooldown = 0f;
+        
         if (_health <= 0) OnDeath(damager);
     }
 

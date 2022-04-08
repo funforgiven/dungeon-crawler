@@ -172,9 +172,13 @@ MonoBehaviour:
   critRate: 0
   critDamage: 200
   defaultWalkSpeed: 4
+  sprint: {fileID: 5107165434775897549}
   maxHealth: 100
+  healthRegen: 1
+  healthRegenCooldown: 3
   userInterface: {fileID: 8453364889026819139, guid: cfd287232a8babc42802db19e8478152, type: 3}
   maxMana: 50
+  manaRegen: 1
   manaShieldPrefab: {fileID: 4314562143039633011, guid: 726c7b9e837c58847accb481f80dc209, type: 3}
   manaShieldCooldown: 10
   manaBallPrefab: {fileID: 7256436818530167315, guid: 0ab6c74f0bc621c41aab967c3f1fff5a, type: 3}
@@ -184,7 +188,7 @@ MonoBehaviour:
   manaBallDamage: 25
   hasteRunSpeed: 12
   hasteSwingSpeed: 2
-  hasteManaCost: 1
+  hasteManaCost: 10
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15
@@ -247,6 +251,10 @@ PrefabInstance:
       value: Sprint_Teal_0
       objectReference: {fileID: 0}
     - target: {fileID: 4908687581456666161, guid: 1bf0d9888a36e994a92aa6f05a2c3128, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908687581456666161, guid: 1bf0d9888a36e994a92aa6f05a2c3128, type: 3}
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
@@ -255,5 +263,10 @@ PrefabInstance:
 --- !u!4 &2069799608247982297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1837638423639060762, guid: 1bf0d9888a36e994a92aa6f05a2c3128, type: 3}
+  m_PrefabInstance: {fileID: 376610976205662659}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5107165434775897549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4889139293319654414, guid: 1bf0d9888a36e994a92aa6f05a2c3128, type: 3}
   m_PrefabInstance: {fileID: 376610976205662659}
   m_PrefabAsset: {fileID: 0}

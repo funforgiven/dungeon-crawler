@@ -6,6 +6,7 @@ public class HumanHero : Hero
 {
     [Header("Mana")]
     [SerializeField] private float maxMana = 100f;
+    [SerializeField] private float manaRegen = 1f;
     internal float mana;
     private Slider manaBar;
 
@@ -64,7 +65,8 @@ public class HumanHero : Hero
     protected override void Update()
     {
         base.Update();
-        
+
+        mana += Time.deltaTime * manaRegen;
         manaBar.value = mana / maxMana;
         switch (_dashState)
         {
@@ -159,9 +161,11 @@ public class HumanHero : Hero
         if (Input.GetKeyDown(KeyCode.R))
         {
             _inHaste = true;
+
             walkSpeed = hasteRunSpeed;
             var sword = currentWeapon.GetComponent<Sword>();
             currentWeapon.GetComponent<Sword>()._swingDuration = (1/hasteSwingSpeed) * sword.defaultSwingDuration;
+            sprint.GetComponent<SpriteRenderer>().enabled = true;
         }
         else if (Input.GetKeyUp(KeyCode.R))
         {
@@ -169,6 +173,7 @@ public class HumanHero : Hero
             walkSpeed = defaultWalkSpeed;
             var sword = currentWeapon.GetComponent<Sword>();
             sword._swingDuration = sword.defaultSwingDuration;
+            sprint.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         if (_inHaste)
@@ -183,6 +188,7 @@ public class HumanHero : Hero
                 walkSpeed = defaultWalkSpeed;
                 var sword = currentWeapon.GetComponent<Sword>();
                 sword._swingDuration = sword.defaultSwingDuration;
+                sprint.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ImpHero : Hero
@@ -25,6 +23,14 @@ public class ImpHero : Hero
     private bool _flameBarrierOnCooldown = false;
     private float _flameBarrierCurrentCooldown = 0f;
 
+    [Header("Big Fireball")]
+    [SerializeField] private float bigFireballCooldown = 5f;
+    [SerializeField] private float bigFireballDamage = 25f;
+    [SerializeField] private float bigFireballDamageRadius = 3f;
+    [SerializeField] private LayerMask bigFireballDamageLayer;
+    private bool _bigFireballOnCooldown = false;
+    private float _bigFireballCurrentCooldown = 0f;
+
 
     protected override void Start()
     {
@@ -35,7 +41,7 @@ public class ImpHero : Hero
     {
         base.Update();
         
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!_fireballOnCooldown)
             {
@@ -61,7 +67,7 @@ public class ImpHero : Hero
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (!_flameBarrierOnCooldown)
             {
@@ -85,6 +91,34 @@ public class ImpHero : Hero
         if (_flameBarrierActive)
         {
             _health += Time.deltaTime * flameBarrierRegeneration;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!_flameBarrierOnCooldown)
+            {
+                _flameBarrierOnCooldown = true;
+
+                var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var overlap = Physics2D.OverlapCircleAll(location, bigFireballDamageRadius, bigFireballDamageLayer);
+                
+                foreach (var col in overlap)
+                {
+                    var damageable = col.GetComponent<IDamageable>();
+                    if(damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject);
+                }
+            }
+        }
+        
+        if (_bigFireballOnCooldown)
+        {
+            _bigFireballCurrentCooldown += Time.deltaTime;
+
+            if (_bigFireballCurrentCooldown > bigFireballCooldown)
+            {
+                _bigFireballCurrentCooldown = 0;
+                _bigFireballOnCooldown = false;
+            }
         }
     }
     
