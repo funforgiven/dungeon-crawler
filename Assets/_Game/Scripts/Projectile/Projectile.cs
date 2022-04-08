@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour
 {
     internal float damage;
     internal GameObject owner;
-    
+
     private Animator _animator;
 
     private void Start()
@@ -13,8 +13,8 @@ public class Projectile : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.SetBool("Move", true);
     }
-    
-    private void OnTriggerEnter2D(Collider2D col)
+
+  /*  private void OnTriggerEnter2D(Collider2D col)
     {
         ApplyDamage(col.GetComponent<IDamageable>());
         _animator.SetBool("Explode", _explode);
@@ -27,9 +27,9 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
-        
+
     void ApplyDamage(IDamageable damageable)
     {
         damageable.TakeDamage(damage, owner);
-    }
+    }*/
 }

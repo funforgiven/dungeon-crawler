@@ -172,6 +172,7 @@ MonoBehaviour:
   critDamage: 200
   defaultWalkSpeed: 4
   maxHealth: 100
+  userInterface: {fileID: 8453364889026819139, guid: cfd287232a8babc42802db19e8478152, type: 3}
   maxMana: 50
   manaShieldPrefab: {fileID: 4314562143039633011, guid: 726c7b9e837c58847accb481f80dc209, type: 3}
   manaShieldCooldown: 10

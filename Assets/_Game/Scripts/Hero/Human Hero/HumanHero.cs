@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HumanHero : Hero
 {
-    [Header("Mana")] 
+    [Header("Mana")]
     [SerializeField] private float maxMana = 100f;
     internal float mana;
-    
+    private Slider manaBar;
+
     [Header("Mana Shield")]
     [SerializeField] private GameObject manaShieldPrefab;
     [SerializeField] public float manaShieldCooldown = 10f;
@@ -14,7 +16,7 @@ public class HumanHero : Hero
     internal bool _manaShieldOnCooldown = false;
     internal bool _manaShieldEnabled = false;
     private float _manaShieldCurrentCooldown = 0f;
-    
+
     [Header("Mana Ball")]
     [SerializeField] private GameObject manaBallPrefab;
     [SerializeField] private float manaBallCooldown = 10f;
@@ -30,16 +32,16 @@ public class HumanHero : Hero
     [SerializeField] private float hasteSwingSpeed = 2f;
     [SerializeField] private float hasteManaCost = 1f;
     private bool _inHaste = false;
-    
+
     [Header("Dash")]
     [SerializeField] private float dashCooldown = 3f;
     [SerializeField] private float dashTime = 1f;
     [SerializeField] private float dashSpeed = 3f;
-    
+
     private DashState _dashState;
     private float _dashCurrentTime;
     private float _dashCurrentCooldown;
-    
+
     [Header("Stab")]
     [SerializeField] private float stabCooldown = 3f;
     [SerializeField] private float stabTime = 1f;
@@ -48,21 +50,23 @@ public class HumanHero : Hero
     private StabState _stabState;
     private float _stabCurrentTime;
     private float _stabCurrentCooldown;
-    
+
     private Vector2 _savedVelocity;
 
     protected override void Start()
     {
         base.Start();
-        
+
         mana = maxMana;
+        manaBar = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
+
     }
-    
+
     protected override void Update()
     {
         base.Update();
-        
-        switch (_dashState) 
+        manaBar.value = mana / maxMana;
+        switch (_dashState)
         {
             case DashState.Ready:
                 if (Input.GetKeyDown(KeyCode.Space) && _stabState != StabState.Stabbing)
@@ -93,19 +97,19 @@ public class HumanHero : Hero
                 }
                 break;
         }
-        
-        switch (_stabState) 
+
+        switch (_stabState)
         {
             case StabState.Ready:
                 if(Input.GetKeyDown(KeyCode.Mouse1) && _dashState != DashState.Dashing)
                 {
                     _savedVelocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-                    
+
                     var weapon = currentWeapon.GetComponent<Weapon>();
                     weapon.Enable();
                     var rotZ = Mathf.Atan2(_savedVelocity.y, _savedVelocity.x) * Mathf.Rad2Deg;
                     weapon.transform.rotation = Quaternion.Euler(0, 0, rotZ - 90f);
-                        
+
                     _stabState = StabState.Stabbing;
                 }
                 break;
@@ -138,7 +142,7 @@ public class HumanHero : Hero
                 _manaShieldCurrentCooldown = 0f;
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!_manaShieldOnCooldown)
@@ -175,13 +179,13 @@ public class HumanHero : Hero
             {
                 mana = 0;
                 _inHaste = false;
-                
+
                 walkSpeed = defaultWalkSpeed;
                 var sword = currentWeapon.GetComponent<Sword>();
                 sword._swingDuration = sword.defaultSwingDuration;
             }
         }
-        
+
         if (Input.GetKeyUp(KeyCode.Q))
         {
             if (!_manaBallOnCooldown)
@@ -190,7 +194,7 @@ public class HumanHero : Hero
                 {
                     mana -= manaBallManaCost;
                     _manaBallOnCooldown = true;
-                    
+
                     _manaBall = Instantiate(manaBallPrefab, transform.position, Quaternion.identity);
 
                     var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -235,19 +239,19 @@ public class HumanHero : Hero
         {
             return;
         }
-        
+
         base.TakeDamage(damage, damager);
     }
 }
 
-public enum DashState 
+public enum DashState
 {
     Ready,
     Dashing,
     Cooldown
 }
 
-public enum StabState 
+public enum StabState
 {
     Ready,
     Stabbing,
