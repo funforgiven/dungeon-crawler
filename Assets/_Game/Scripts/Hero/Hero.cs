@@ -22,6 +22,9 @@ public class Hero : MonoBehaviour, IDamageable
     private float _health;
     private Slider healthBar;
 
+    [Header("UI")] 
+    [SerializeField] private GameObject userInterface;
+
     protected virtual void Start()
     {
         _health = maxHealth;
@@ -36,6 +39,8 @@ public class Hero : MonoBehaviour, IDamageable
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
         currentWeapon.GetComponent<Weapon>().owner = this;
+
+        Instantiate(userInterface);
     }
 
     // Update is called once per frame
