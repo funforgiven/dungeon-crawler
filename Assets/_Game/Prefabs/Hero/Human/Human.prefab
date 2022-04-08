@@ -170,8 +170,19 @@ MonoBehaviour:
   currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
   critRate: 0
   critDamage: 200
-  walkSpeed: 4
+  defaultWalkSpeed: 4
   maxHealth: 100
+  maxMana: 50
+  manaShieldPrefab: {fileID: 4314562143039633011, guid: 726c7b9e837c58847accb481f80dc209, type: 3}
+  manaShieldCooldown: 10
+  manaBallPrefab: {fileID: 7256436818530167315, guid: 0ab6c74f0bc621c41aab967c3f1fff5a, type: 3}
+  manaBallCooldown: 3
+  manaBallManaCost: 10
+  manaBallSpeed: 12
+  manaBallDamage: 25
+  hasteRunSpeed: 12
+  hasteSwingSpeed: 2
+  hasteManaCost: 1
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15

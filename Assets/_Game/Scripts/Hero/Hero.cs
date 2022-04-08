@@ -9,27 +9,33 @@ public class Hero : MonoBehaviour, IDamageable
     [SerializeField] public float critDamage = 200f;
 
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 4f;
+    [SerializeField] protected float defaultWalkSpeed = 4f;
+    protected float walkSpeed;
     protected float _inputHorizontal;
     protected float _inputVertical;
     protected Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-
+    internal Collider _collider;
+    
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
     private float _health;
     private Slider healthBar;
 
-    private void Start()
+    protected virtual void Start()
     {
         _health = maxHealth;
+		walkSpeed = defaultWalkSpeed;
+		
         healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
+        
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
-
+        _animator = GetComponent<Animator>();        
+        _collider = GetComponent<Collider>();
+        
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
         currentWeapon.GetComponent<Weapon>().owner = this;
@@ -47,7 +53,7 @@ public class Hero : MonoBehaviour, IDamageable
             currentWeapon.GetComponent<Weapon>().Attack();
         }
     }
-
+    
     protected virtual void FixedUpdate()
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);
@@ -61,11 +67,11 @@ public class Hero : MonoBehaviour, IDamageable
             _spriteRenderer.flipX = false;
     }
 
-    public void TakeDamage(float damage, GameObject damager)
+    public virtual void TakeDamage(float damage, GameObject damager)
     {
         _health -= damage;
 
-        if (_health > 0) OnDeath(damager);
+        if (_health <= 0) OnDeath(damager);
     }
 
     public void OnDeath(GameObject killer)

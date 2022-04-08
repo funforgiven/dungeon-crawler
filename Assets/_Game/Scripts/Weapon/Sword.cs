@@ -4,13 +4,16 @@ using UnityEngine;
 public class Sword : Weapon
 {
     [SerializeField] private float swingAngle = 90f;
-    [SerializeField] private float swingDuration = 1f;
+    [SerializeField] public float defaultSwingDuration = 0.5f;
+    internal float _swingDuration;
 
     private bool _canSwing = true;
 
     private void Start()
     {
         Disable();
+
+        _swingDuration = defaultSwingDuration;
     }
 
     public override void Attack()
@@ -30,10 +33,10 @@ public class Sword : Weapon
         Enable();
         
         float timeElapsed = 0;
-        while (timeElapsed < swingDuration)
+        while (timeElapsed < _swingDuration)
         {
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0f, 0f, rotZ - swingAngle/2),
-                Quaternion.Euler(0f, 0f, rotZ - 3*swingAngle/2), timeElapsed / swingDuration);
+                Quaternion.Euler(0f, 0f, rotZ - 3*swingAngle/2), timeElapsed / _swingDuration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
