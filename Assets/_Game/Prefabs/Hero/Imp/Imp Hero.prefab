@@ -147,11 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec21d8d90ea6b44ead3e41e17fb7ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275, type: 3}
+  currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
   critRate: 0
   critDamage: 200
   defaultWalkSpeed: 4
+  sprint: {fileID: 0}
   maxHealth: 100
+  healthRegen: 1
+  healthRegenCooldown: 3
   userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c, type: 3}
   fireballPrefab: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275, type: 3}
   fireballCooldown: 2
