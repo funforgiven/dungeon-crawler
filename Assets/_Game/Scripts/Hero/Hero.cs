@@ -19,7 +19,7 @@ public class Hero : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
-    private float _health;
+    protected float _health;
     private Slider healthBar;
 
     [Header("UI")] 
@@ -45,7 +45,7 @@ public class Hero : MonoBehaviour, IDamageable
     // Update is called once per frame
     protected virtual void Update()
     {
-        //healthBar.value = _health / maxHealth;
+        healthBar.value = _health / maxHealth;
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
 

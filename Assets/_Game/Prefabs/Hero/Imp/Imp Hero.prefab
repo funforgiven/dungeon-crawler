@@ -152,11 +152,19 @@ MonoBehaviour:
   critDamage: 200
   defaultWalkSpeed: 4
   maxHealth: 100
-  userInterface: {fileID: 0}
+  userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c, type: 3}
   fireballPrefab: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275, type: 3}
   fireballCooldown: 2
   fireballSpeed: 12
   fireballDamage: 50
+  flameBarrierCooldown: 5
+  flameBarrierCharge: 5
+  flameBarrierRegeneration: 2
+  flameBarrierDamage: 25
+  flameBarrierDamageRadius: 1
+  flameBarrierDamageLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &5395373557877985562
 Animator:
   serializedVersion: 4

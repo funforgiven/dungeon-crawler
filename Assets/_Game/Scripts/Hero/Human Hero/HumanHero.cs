@@ -59,12 +59,12 @@ public class HumanHero : Hero
 
         mana = maxMana;
         manaBar = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
-
     }
 
     protected override void Update()
     {
         base.Update();
+        
         manaBar.value = mana / maxMana;
         switch (_dashState)
         {
