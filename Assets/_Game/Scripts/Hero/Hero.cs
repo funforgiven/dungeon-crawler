@@ -24,7 +24,7 @@ public class Hero : MonoBehaviour, IDamageable
     private void Start()
     {
         _health = maxHealth;
-        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>();
+        healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
