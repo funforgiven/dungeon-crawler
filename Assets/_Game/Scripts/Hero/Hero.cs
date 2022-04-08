@@ -16,8 +16,7 @@ public class Hero : MonoBehaviour, IDamageable
     protected Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    internal Collider _collider;
-    
+
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
     private float _health;
@@ -30,12 +29,10 @@ public class Hero : MonoBehaviour, IDamageable
 		
         healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
-        
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();        
-        _collider = GetComponent<Collider>();
-        
+        _animator = GetComponent<Animator>();
+
         currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
         currentWeapon.GetComponent<Weapon>().owner = this;
