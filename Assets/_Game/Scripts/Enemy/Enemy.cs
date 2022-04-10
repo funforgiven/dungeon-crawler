@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
-    [SerializeField] private HPBar Healthbar;
-    [SerializeField]public Slider Bar;
+    [SerializeField] private Canvas _healthCanvas;
+    private Slider _healthBar;
 
     [Header("Hero")]
     [SerializeField] public GameObject hero;
@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        _healthCanvas = Instantiate(_healthCanvas, transform, true);
+        _healthCanvas.worldCamera = Camera.main;
+        _healthBar = _healthCanvas.GetComponentInChildren<Slider>();
+        
         _target = GameObject.FindWithTag("Player").transform;
 
         _transform = transform;
@@ -42,18 +46,14 @@ public class Enemy : MonoBehaviour, IDamageable
         _agent.updateUpAxis = false;
 
         _health = maxHealth;
-
-
     }
 
     protected virtual void Update()
     {
-      Bar.value= _health / maxHealth;
-      Bar.transform.SetParent(transform);
+        _healthBar.value = _health / maxHealth;
 
         _spriteRenderer.flipX = _transform.position.x < _target.position.x;
         _animator.SetBool("Move", _agent.velocity.magnitude > 0);
-        Healthbar.slider.value = _health / maxHealth;
         var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
 
         if (_inCC)
