@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("Agent")]
     [HideInInspector] public NavMeshAgent _agent;
-    protected bool _isShooting = false;
+    internal bool _isShooting = false;
     public bool _inCC = false;
     protected float _health;
     protected Transform _target;

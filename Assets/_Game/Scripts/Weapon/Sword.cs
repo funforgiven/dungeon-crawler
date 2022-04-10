@@ -5,25 +5,30 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] private float swingAngle = 90f;
     [SerializeField] public float defaultSwingDuration = 0.5f;
+    [SerializeField] public Sprite defaultSprite;
     
     internal Hero owner;
     
     internal float _swingDuration;
     private bool _canSwing = true;
     private string _identifier = "";
+    private SpriteRenderer _spriteRenderer;
     
     private void Start()
     {
         Disable();
 
         _swingDuration = defaultSwingDuration;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Attack(string identifier = "")
+    public void Attack(string identifier = "", Sprite sprite = null)
     {
         if (_canSwing)
         {
             _identifier = identifier;
+            _spriteRenderer.sprite = sprite ? sprite : defaultSprite;
             StartCoroutine(Swing());
         }
     }

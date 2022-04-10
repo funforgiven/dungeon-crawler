@@ -31,6 +31,7 @@ public class ShriekHero : Hero
     [Header("Fear")]
     [SerializeField] private float fearCooldown = 5f;
     [SerializeField] private float fearDuration = 2f;
+    [SerializeField] private float fearMaxRange = 10f;
     private bool _fearOnCooldown = false;
     private float _fearCurrentCooldown = 0f;
     private float _fearCurrentDuration = 0f;
@@ -142,14 +143,14 @@ public class ShriekHero : Hero
     {
         var pos = enemy.transform.position;
         var direction =  pos + pos - transform.position;
-        Vector3 runPosition = direction.normalized * 5f;
+        Vector3 runPosition = direction.normalized * fearMaxRange;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(runPosition, out hit, 5, 1);
-        
-        enemy._agent.SetDestination(hit.position);
+        NavMesh.SamplePosition(runPosition, out hit, fearMaxRange, 1);
         
         enemy._inCC = true;
+        enemy._agent.SetDestination(runPosition);
+        
         yield return new WaitForSeconds(fearDuration);
         enemy._inCC = false;
     }

@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float explosionDamage;
     [SerializeField] private float chargeTime;
 
-    [HideInInspector] public GameObject owner;
+    internal Enemy owner;
     [HideInInspector] public Transform target;
 
     private Animator _animator;
@@ -23,18 +23,23 @@ public class Fireball : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        owner.GetComponent<Enemy>()._agent.enabled = false;
+        transform.SetParent(owner.transform);
     }
     private void Update()
     {
         if (!owner) Destroy(gameObject);
+        if (owner._inCC && !_startedMoving) Destroy(gameObject);
 
+        if (!_startedMoving)
+        {
+            if(!owner._inCC)
+                owner._agent.ResetPath();
+        }
+        
         _chargeTimeElapsed += Time.deltaTime;
-
         if (_chargeTimeElapsed > chargeTime && !_startedMoving)
         {
             _animator.SetBool("Move", true);
-            owner.GetComponent<Enemy>()._agent.enabled = true;
             Move(transform.position, target.position);
             _startedMoving = true;
         }
@@ -63,6 +68,6 @@ public class Fireball : MonoBehaviour
     void ApplyDamage(float damageToDeal, IDamageable damageable)
     {
         if (damageable == null) return;
-        damageable.TakeDamage(damageToDeal, owner, DamageType.Magical);
+        damageable.TakeDamage(damageToDeal, owner.gameObject, DamageType.Magical);
     }
 }
