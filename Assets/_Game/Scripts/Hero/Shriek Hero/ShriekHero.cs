@@ -142,14 +142,13 @@ public class ShriekHero : Hero
     private IEnumerator Fear(Enemy enemy)
     {
         var pos = enemy.transform.position;
-        var direction =  pos + pos - transform.position;
-        Vector3 runPosition = direction.normalized * fearMaxRange;
+        var direction =  pos - transform.position;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(runPosition, out hit, fearMaxRange, 1);
+        NavMesh.SamplePosition(direction, out hit, fearMaxRange, 1);
         
         enemy._inCC = true;
-        enemy._agent.SetDestination(runPosition);
+        enemy._agent.SetDestination(hit.position);
         
         yield return new WaitForSeconds(fearDuration);
         enemy._inCC = false;
