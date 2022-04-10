@@ -34,25 +34,13 @@ public class HumanHero : Hero
     [SerializeField] private float hasteManaCost = 1f;
     private bool _inHaste = false;
 
-    [Header("Dash")]
-    [SerializeField] private float dashCooldown = 3f;
-    [SerializeField] private float dashTime = 1f;
-    [SerializeField] private float dashSpeed = 3f;
-
-    private DashState _dashState;
-    private float _dashCurrentTime;
-    private float _dashCurrentCooldown;
-
     [Header("Stab")]
     [SerializeField] private float stabCooldown = 3f;
     [SerializeField] private float stabTime = 1f;
     [SerializeField] private float stabSpeed = 3f;
-
-    private StabState _stabState;
+    
     private float _stabCurrentTime;
     private float _stabCurrentCooldown;
-
-    private Vector2 _savedVelocity;
 
     protected override void Start()
     {
@@ -73,37 +61,6 @@ public class HumanHero : Hero
 
         mana += Time.deltaTime * manaRegen;
         manaBar.value = mana / maxMana;
-        switch (_dashState)
-        {
-            case DashState.Ready:
-                if (Input.GetKeyDown(KeyCode.Space) && _stabState != StabState.Stabbing)
-                {
-                    _savedVelocity = new Vector2(_inputHorizontal, _inputVertical).normalized;
-
-                    if (_savedVelocity.magnitude > 0)
-                    {
-                        _dashState = DashState.Dashing;
-                    }
-                }
-                break;
-            case DashState.Dashing:
-                _dashCurrentTime += Time.deltaTime;
-                if(_dashCurrentTime >= dashTime)
-                {
-                    sword.Disable();
-                    _dashCurrentTime = 0f;
-                    _dashState = DashState.Cooldown;
-                }
-                break;
-            case DashState.Cooldown:
-                _dashCurrentCooldown += Time.deltaTime;
-                if(_dashCurrentCooldown >= dashCooldown)
-                {
-                    _dashCurrentCooldown = 0f;
-                    _dashState = DashState.Ready;
-                }
-                break;
-        }
 
         switch (_stabState)
         {
@@ -227,10 +184,8 @@ public class HumanHero : Hero
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        if (_dashState == DashState.Dashing)
-            _rigidbody.velocity = _savedVelocity.normalized * dashSpeed;
-        else if(_stabState == StabState.Stabbing)
+        
+        if(_stabState == StabState.Stabbing)
             _rigidbody.velocity = _savedVelocity.normalized * stabSpeed;
     }
 

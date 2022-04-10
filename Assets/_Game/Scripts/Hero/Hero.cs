@@ -29,6 +29,18 @@ public class Hero : MonoBehaviour, IDamageable
     protected float _health;
     private Slider healthBar;
     private bool isDead = false;
+    
+    [Header("Dash")]
+    [SerializeField] private float dashCooldown = 5f;
+    [SerializeField] private float dashTime = 0.2f;
+    [SerializeField] private float dashSpeed = 15f;
+
+    protected DashState _dashState;
+    private float _dashCurrentTime;
+    private float _dashCurrentCooldown;
+    
+    protected Vector2 _savedVelocity;
+    protected StabState _stabState;
 
     [Header("UI")] 
     [SerializeField] private GameObject userInterface;
@@ -65,6 +77,38 @@ public class Hero : MonoBehaviour, IDamageable
         {
             _health += Time.deltaTime * healthRegen;
         }
+        
+        switch (_dashState)
+        {
+            case DashState.Ready:
+                if (Input.GetKeyDown(KeyCode.Space) && _stabState != StabState.Stabbing)
+                {
+                    _savedVelocity = new Vector2(_inputHorizontal, _inputVertical).normalized;
+
+                    if (_savedVelocity.magnitude > 0)
+                    {
+                        _dashState = DashState.Dashing;
+                    }
+                }
+                break;
+            case DashState.Dashing:
+                _dashCurrentTime += Time.deltaTime;
+                if(_dashCurrentTime >= dashTime)
+                {
+                    sword.Disable();
+                    _dashCurrentTime = 0f;
+                    _dashState = DashState.Cooldown;
+                }
+                break;
+            case DashState.Cooldown:
+                _dashCurrentCooldown += Time.deltaTime;
+                if(_dashCurrentCooldown >= dashCooldown)
+                {
+                    _dashCurrentCooldown = 0f;
+                    _dashState = DashState.Ready;
+                }
+                break;
+        }
     }
     
     protected virtual void FixedUpdate()
@@ -84,6 +128,9 @@ public class Hero : MonoBehaviour, IDamageable
             _spriteRenderer.flipX = false;
             //sprint.GetComponent<SpriteRenderer>().flipX = false;
         }
+        
+        if (_dashState == DashState.Dashing)
+            _rigidbody.velocity = _savedVelocity.normalized * dashSpeed;
     }
 
     public virtual void TakeDamage(float damage, GameObject damager, DamageType damageType)
