@@ -14,10 +14,10 @@ public abstract class Weapon : MonoBehaviour
         int roll = Random.Range(0, 100);
         if (roll < owner.critRate)
         {
-            enemy.TakeDamage(damage * (owner.critDamage/100), owner.gameObject);
+            enemy.TakeDamage(damage * (owner.critDamage/100), owner.gameObject, DamageType.Physical);
         }
         else
-            enemy.TakeDamage(damage, owner.gameObject);
+            enemy.TakeDamage(damage, owner.gameObject, DamageType.Physical);
     }
 
     public void Enable()

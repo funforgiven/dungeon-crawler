@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ImpHero : Hero
 {
+    [Header("Passive")]
+    [SerializeField] private float fireDamageReduction = 0.5f;
+    
     [Header("Fireball")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballCooldown = 10f;
@@ -52,7 +55,7 @@ public class ImpHero : Hero
                 var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 _fireball.GetComponent<Rigidbody2D>().velocity = direction.normalized * fireballSpeed;
                 _fireball.GetComponent<Projectile>().owner = gameObject;
-                _fireball.GetComponent<Projectile>().damage = fireballDamage;
+                _fireball.GetComponent<Projectile>()._damage = fireballDamage;
             }
         }
 
@@ -74,6 +77,8 @@ public class ImpHero : Hero
                 _flameBarrierActive = true;
                 _flameBarrierOnCooldown = true;
                 _flameBarrierCurrentCharge = flameBarrierCharge;
+                
+                _animator.SetBool("Flame Barrier", true);
             }
         }
         
@@ -105,7 +110,7 @@ public class ImpHero : Hero
                 foreach (var col in overlap)
                 {
                     var damageable = col.GetComponent<IDamageable>();
-                    if(damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject);
+                    if(damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
                 }
             }
         }
@@ -122,19 +127,22 @@ public class ImpHero : Hero
         }
     }
     
-    public override void TakeDamage(float damage, GameObject damager)
+    public override void TakeDamage(float damage, GameObject damager, DamageType damageType)
     {
         if (_flameBarrierActive)
         {
             _flameBarrierCurrentCharge -= 1;
             if (_flameBarrierCurrentCharge == 0)
+            {
                 _flameBarrierActive = false;
-        
+                _animator.SetBool("Flame Barrier", false);
+            }
+
             Explode();
         }
 
-       
-        base.TakeDamage(damage, damager);
+        if(damageType == DamageType.Fire) base.TakeDamage(damage * fireDamageReduction, damager, damageType);
+        else base.TakeDamage(damage, damager, damageType);
     }
 
     private void Explode()
@@ -144,7 +152,7 @@ public class ImpHero : Hero
         foreach (var col in overlap)
         {
             var damageable = col.GetComponent<IDamageable>();
-            if(damageable != null) damageable.TakeDamage(flameBarrierDamage, gameObject);
+            if(damageable != null) damageable.TakeDamage(flameBarrierDamage, gameObject, DamageType.Magical);
         }
     }
 }

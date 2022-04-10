@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage, GameObject damager)
+    public void TakeDamage(float damage, GameObject damager, DamageType damageType)
     {
         _health -= damage;
         

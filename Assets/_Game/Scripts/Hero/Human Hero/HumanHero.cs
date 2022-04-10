@@ -206,7 +206,7 @@ public class HumanHero : Hero
                     var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                     _manaBall.GetComponent<Rigidbody2D>().velocity = direction.normalized * manaBallSpeed;
                     _manaBall.GetComponent<Projectile>().owner = gameObject;
-                    _manaBall.GetComponent<Projectile>().damage = manaBallDamage;
+                    _manaBall.GetComponent<Projectile>()._damage = manaBallDamage;
                 }
             }
         }
@@ -233,7 +233,7 @@ public class HumanHero : Hero
             _rigidbody.velocity = _savedVelocity.normalized * stabSpeed;
     }
 
-    public override void TakeDamage(float damage, GameObject damager)
+    public override void TakeDamage(float damage, GameObject damager, DamageType damageType)
     {
         if (_manaShieldEnabled && !_manaShield)
         {
@@ -246,7 +246,7 @@ public class HumanHero : Hero
             return;
         }
 
-        base.TakeDamage(damage, damager);
+        base.TakeDamage(damage, damager, damageType);
     }
 }
 

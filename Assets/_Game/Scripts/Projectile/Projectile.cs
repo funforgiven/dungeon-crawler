@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    internal float damage;
+    internal float _damage;
+    internal DamageType _damageType;
     internal GameObject owner;
     
     private Animator _animator;
@@ -39,6 +40,6 @@ public class Projectile : MonoBehaviour
         
     void ApplyDamage(IDamageable damageable)
     {
-        damageable.TakeDamage(damage, owner);
+        damageable.TakeDamage(_damage, owner, _damageType);
     }
 }

@@ -16,7 +16,7 @@ public class Hero : MonoBehaviour, IDamageable
     protected float _inputVertical;
     protected Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    protected Animator _animator;
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
@@ -85,7 +85,7 @@ public class Hero : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void TakeDamage(float damage, GameObject damager)
+    public virtual void TakeDamage(float damage, GameObject damager, DamageType damageType)
     {
         _health -= damage;
         _healthRegenCurrentCooldown = 0f;

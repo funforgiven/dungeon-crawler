@@ -12,7 +12,7 @@ public class ManaShield : MonoBehaviour, IDamageable
         _hero._manaShieldEnabled = true;
     }
     
-    public void TakeDamage(float damage, GameObject damager)
+    public void TakeDamage(float damage, GameObject damager,  DamageType damageType = DamageType.Physical)
     {
         _hero.mana -= damage;
 
