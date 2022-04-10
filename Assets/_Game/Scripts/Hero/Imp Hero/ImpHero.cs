@@ -15,10 +15,15 @@ public class ImpHero : Hero
     private float _sprintCurrentDuration;
 
     [Header("Fire Sword")]
-    [SerializeField] private float fireSwordDamage = 3f;
-    [SerializeField] private int fireSwordDuration = 4;
-    [SerializeField] private float fireSwordCooldown = 2f;
     [SerializeField] private Sprite fireSwordSprite;
+    [SerializeField] private float fireSwordCooldown = 10f;
+    private bool _fireSwordOnCooldown = false;
+    private float _fireSwordCurrentCooldown = 0f;
+    
+    [Header("Burn")]
+    [SerializeField] private float burnDamage = 3f;
+    [SerializeField] private int burnDuration = 4;
+    [SerializeField] private float burnInterval = 2f;
     private List<Enemy> _burningEnemies = new List<Enemy>();
 
 
@@ -71,10 +76,28 @@ public class ImpHero : Hero
         {
             sword.Attack();
         }
+        
         PSprint.value = sprintDuration - _sprintCurrentDuration;
+        
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            sword.Attack("Burn", fireSwordSprite);
+            if (!_fireSwordOnCooldown)
+            {
+                sword.Attack("Burn", fireSwordSprite);
+                _fireSwordOnCooldown = true;
+                _fireSwordCurrentCooldown = 0;
+            }
+        }
+        
+        if (_fireSwordOnCooldown)
+        {
+            _fireSwordCurrentCooldown += Time.deltaTime;
+
+            if (_fireSwordCurrentCooldown > fireSwordCooldown)
+            {
+                _fireSwordCurrentCooldown = 0;
+                _fireSwordOnCooldown = false;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -147,8 +170,12 @@ public class ImpHero : Hero
 
                 foreach (var col in overlap)
                 {
-                    var damageable = col.GetComponent<IDamageable>();
-                    if (damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
+                    var enemy = col.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
+                        StartCoroutine(Burn(enemy, burnDamage, burnDuration, burnInterval));
+                    }
                 }
 
                 Sprint();
@@ -210,14 +237,14 @@ public class ImpHero : Hero
         _burningEnemies.Remove(enemy);
     }
 
-    public override void ApplyDamage(Enemy enemy, string identifier)
+    public override void ApplyDamage(Enemy enemy, string identifier = null, float damage = -1)
     {
         if (identifier == "Burn")
         {
-            StartCoroutine(Burn(enemy, fireSwordDamage, fireSwordDuration, fireSwordCooldown));
+            StartCoroutine(Burn(enemy, burnDamage, burnDuration, burnInterval));
         }
 
-        base.ApplyDamage(enemy, identifier);
+        base.ApplyDamage(enemy, identifier, damage);
     }
 
     public override void TakeDamage(float damage, GameObject damager, DamageType damageType)

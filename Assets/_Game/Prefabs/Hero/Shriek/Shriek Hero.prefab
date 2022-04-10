@@ -190,6 +190,12 @@ MonoBehaviour:
   aoeDamageLayer:
     serializedVersion: 2
     m_Bits: 128
+  fearCooldown: 5
+  fearDuration: 2
+  fearMaxRange: 10
+  curseDamage: 5
+  curseCooldown: 25
+  curseDuration: 10
 --- !u!1 &7938410519727055175
 GameObject:
   m_ObjectHideFlags: 0

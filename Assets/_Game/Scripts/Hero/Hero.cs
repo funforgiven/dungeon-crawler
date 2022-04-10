@@ -145,16 +145,18 @@ public class Hero : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void ApplyDamage(Enemy enemy, string identifier)
+    public virtual void ApplyDamage(Enemy enemy, string identifier, float damage = -1)
     {
+        if (damage == -1)
+            damage = swordDamage;
         
         int roll = Random.Range(0, 100);
         if (roll < critRate)
         {
-            enemy.TakeDamage(swordDamage * (critDamage/100), gameObject, DamageType.Physical);
+            enemy.TakeDamage(damage * (critDamage/100), gameObject, DamageType.Physical);
         }
         else
-            enemy.TakeDamage(swordDamage, gameObject, DamageType.Physical);
+            enemy.TakeDamage(damage, gameObject, DamageType.Physical);
     }
     
     public void OnDeath(GameObject killer)

@@ -7,9 +7,7 @@ using UnityEngine.AI;
 
 public class ShriekHero : Hero
 {
-    [Header("Mark")]
     internal List<Enemy> _markedEnemies = new List<Enemy>();
-    
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 1.5f;
     [SerializeField] private float sprintDuration = 4f;
@@ -26,15 +24,23 @@ public class ShriekHero : Hero
     [SerializeField] private LayerMask aoeDamageLayer;
     private bool _aoeOnCooldown = false;
     private float _aoeCurrentCooldown = 0f;
-    private float _aoeCurrentDuration = 0f;
-    
+
     [Header("Fear")]
     [SerializeField] private float fearCooldown = 5f;
     [SerializeField] private float fearDuration = 2f;
     [SerializeField] private float fearMaxRange = 10f;
     private bool _fearOnCooldown = false;
     private float _fearCurrentCooldown = 0f;
-    private float _fearCurrentDuration = 0f;
+
+    [Header("Curse")] 
+    [SerializeField] private float curseDamage = 5f;
+    [SerializeField] private float curseCooldown = 5f;
+    [SerializeField] private float curseDuration = 2f;
+    private bool _curseActive = false;
+    private bool _curseOnCooldown = false;
+    private float _curseCurrentCooldown = 0f;
+    private float _curseCurrentDuration = 0f;
+    internal List<Enemy> _cursedEnemies = new List<Enemy>();
 
 
     protected override void Update()
@@ -117,6 +123,8 @@ public class ShriekHero : Hero
             {
                 if (_markedEnemies.Count > 0)
                 {
+                    _fearOnCooldown = true;
+                    
                     foreach (var enemy in _markedEnemies)
                     {
                         StartCoroutine(Fear(enemy));
@@ -137,6 +145,40 @@ public class ShriekHero : Hero
                 _fearOnCooldown = false;
             }
         }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!_curseOnCooldown)
+            {
+                _curseOnCooldown = true;
+                _curseActive = true;
+                _curseCurrentDuration = 0;
+                
+                _cursedEnemies.AddRange(_markedEnemies);
+                _markedEnemies = new List<Enemy>();
+            }
+        }
+        
+        if (_curseActive)
+        {
+            _curseCurrentDuration += Time.deltaTime;
+            if (_curseCurrentDuration > curseDuration)
+            {
+                _curseActive = false;
+                _cursedEnemies = new List<Enemy>();
+            }
+        }
+        
+        if (_curseOnCooldown)
+        {
+            _curseCurrentCooldown += Time.deltaTime;
+
+            if (_curseCurrentCooldown > curseCooldown)
+            {
+                _curseCurrentCooldown = 0;
+                _curseOnCooldown = false;
+            }
+        }
     }
 
     private IEnumerator Fear(Enemy enemy)
@@ -153,9 +195,13 @@ public class ShriekHero : Hero
         yield return new WaitForSeconds(fearDuration);
         enemy._inCC = false;
     }
-    public override void ApplyDamage(Enemy enemy, string identifier)
+    public override void ApplyDamage(Enemy enemy, string identifier, float damage = -1)
     {
-        base.ApplyDamage(enemy, identifier);
+        if (_curseActive && _cursedEnemies.Contains(enemy))
+            base.ApplyDamage(enemy, identifier, swordDamage + curseDamage);
+        else
+            base.ApplyDamage(enemy, identifier, damage);
+        
         
         if (identifier == "Mark")
         {
