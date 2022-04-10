@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Panel
   - HPBar
+  - MPBar
+  - Counter
   layers:
   - Default
   - TransparentFX
