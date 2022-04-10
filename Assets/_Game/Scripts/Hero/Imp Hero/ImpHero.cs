@@ -11,9 +11,10 @@ public class ImpHero : Hero
     [SerializeField] private float fireDamageReduction = 0.5f;
     [SerializeField] private float sprintSpeed = 1.5f;
     [SerializeField] private float sprintDuration = 3f;
+    private Slider PSprint;
     private float _sprintCurrentDuration;
 
-    [Header("Fire Sword")] 
+    [Header("Fire Sword")]
     [SerializeField] private float fireSwordDamage = 3f;
     [SerializeField] private int fireSwordDuration = 4;
     [SerializeField] private float fireSwordCooldown = 2f;
@@ -35,25 +36,29 @@ public class ImpHero : Hero
     [SerializeField] private float flameBarrierDamage = 25f;
     [SerializeField] private float flameBarrierDamageRadius = 6f;
     [SerializeField] private LayerMask flameBarrierDamageLayer;
-    [SerializeField] private TMP_Text BarrierCounter;
+    private TMP_Text BarrierCounter;
     private int _flameBarrierCurrentCharge;
     private bool _flameBarrierActive;
     private bool _flameBarrierOnCooldown = false;
     private float _flameBarrierCurrentCooldown = 0f;
 
     [Header("Big Fireball")]
+    [SerializeField] private GameObject BigFireballPrefab;
     [SerializeField] private float bigFireballCooldown = 5f;
     [SerializeField] private float bigFireballDamage = 25f;
     [SerializeField] private float bigFireballDamageRadius = 3f;
     [SerializeField] private LayerMask bigFireballDamageLayer;
+    private GameObject _bigFireball;
     private bool _bigFireballOnCooldown = false;
     private float _bigFireballCurrentCooldown = 0f;
+
 
 
     protected override void Start()
     {
         base.Start();
-
+        BarrierCounter = GameObject.FindWithTag("Counter").GetComponent<TMP_Text>();
+        PSprint = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
         _sprintCurrentDuration = sprintDuration;
     }
 
@@ -65,7 +70,7 @@ public class ImpHero : Hero
         {
             sword.Attack();
         }
-
+        PSprint.value = sprintDuration - _sprintCurrentDuration;
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             sword.Attack("Burn");
@@ -131,11 +136,12 @@ public class ImpHero : Hero
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (!_flameBarrierOnCooldown)
-            {
-                _flameBarrierOnCooldown = true;
+            if (!_bigFireballOnCooldown)
+            { //yes
+                _bigFireballOnCooldown = true;
 
                 var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _bigFireball = Instantiate(BigFireballPrefab, location, Quaternion.identity);
                 var overlap = Physics2D.OverlapCircleAll(location, bigFireballDamageRadius, bigFireballDamageLayer);
 
                 foreach (var col in overlap)
@@ -151,6 +157,7 @@ public class ImpHero : Hero
         if (_bigFireballOnCooldown)
         {
             _bigFireballCurrentCooldown += Time.deltaTime;
+
 
             if (_bigFireballCurrentCooldown > bigFireballCooldown)
             {
@@ -182,10 +189,10 @@ public class ImpHero : Hero
             _burningEnemies.Add(enemy);
             yield break;
         }
-        
+
         _burningEnemies.Add(enemy);
         int currentDuration = duration;
-        
+
         while(currentDuration > 0)
         {
             if (_burningEnemies.Count(e => e != null && e.Equals(enemy)) == 2)
@@ -208,7 +215,7 @@ public class ImpHero : Hero
         {
             StartCoroutine(Burn(enemy, fireSwordDamage, fireSwordDuration, fireSwordCooldown));
         }
-        
+
         base.ApplyDamage(enemy, identifier);
     }
 

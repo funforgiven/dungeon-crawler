@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec21d8d90ea6b44ead3e41e17fb7ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordPrefab: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503,
-    type: 3}
+  swordPrefab: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
   swordDamage: 10
   critRate: 0
   critDamage: 200
@@ -157,16 +156,14 @@ MonoBehaviour:
   maxHealth: 100
   healthRegen: 1
   healthRegenCooldown: 3
-  userInterface: {fileID: 8453364889026819139, guid: fd27177b302fb2c4588210994842227d,
-    type: 3}
+  userInterface: {fileID: 8453364889026819139, guid: fd27177b302fb2c4588210994842227d, type: 3}
   fireDamageReduction: 0.5
   sprintSpeed: 1.5
   sprintDuration: 3
   fireSwordDamage: 3
   fireSwordDuration: 4
   fireSwordCooldown: 2
-  fireballPrefab: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275,
-    type: 3}
+  fireballPrefab: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275, type: 3}
   fireballCooldown: 2
   fireballSpeed: 12
   fireballDamage: 50
@@ -178,8 +175,7 @@ MonoBehaviour:
   flameBarrierDamageLayer:
     serializedVersion: 2
     m_Bits: 128
-  BarrierCounter: {fileID: 768203477965800794, guid: 52eda769400c2514db0fc6d3b2caf73a,
-    type: 3}
+  BigFireballPrefab: {fileID: 510593497170817105, guid: c8711b45f6fc6914c9bd6f698d62f3fd, type: 3}
   bigFireballCooldown: 5
   bigFireballDamage: 50
   bigFireballDamageRadius: 3
