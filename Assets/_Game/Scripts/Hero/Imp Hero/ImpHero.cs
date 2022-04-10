@@ -13,15 +13,15 @@ public class ImpHero : Hero
     [SerializeField] private float sprintDuration = 3f;
     private Slider PSprint;
     private float _sprintCurrentDuration;
-
-    [Header("Fire Sword")]
-    [SerializeField] private Sprite fireSwordSprite;
-    [SerializeField] private float fireSwordCooldown = 10f;
     private bool _fireSwordOnCooldown = false;
+    [SerializeField] private float fireSwordCooldown = 10f;
     private float _fireSwordCurrentCooldown = 0f;
     
     [Header("Burn")]
     [SerializeField] private float burnDamage = 3f;
+
+    [Header("Fire Sword")]
+    [SerializeField] private Sprite fireSwordSprite;
     [SerializeField] private int burnDuration = 4;
     [SerializeField] private float burnInterval = 2f;
     private List<Enemy> _burningEnemies = new List<Enemy>();
@@ -196,11 +196,13 @@ public class ImpHero : Hero
 
         if (_sprintCurrentDuration < sprintDuration)
         {
+          sprint.GetComponent<SpriteRenderer>().enabled = true;
             _sprintCurrentDuration += Time.deltaTime;
             walkSpeed = defaultWalkSpeed * sprintSpeed;
         }
         else
         {
+        sprint.GetComponent<SpriteRenderer>().enabled = false;
             walkSpeed = defaultWalkSpeed;
         }
     }
@@ -208,6 +210,8 @@ public class ImpHero : Hero
     private void Sprint()
     {
         _sprintCurrentDuration = 0f;
+
+
     }
 
     private IEnumerator Burn(Enemy enemy, float damage, int duration, float cooldown)

@@ -29,7 +29,7 @@ public class Hero : MonoBehaviour, IDamageable
     protected float _health;
     private Slider healthBar;
     private bool isDead = false;
-    
+
     [Header("Dash")]
     [SerializeField] private float dashCooldown = 5f;
     [SerializeField] private float dashTime = 0.2f;
@@ -38,21 +38,21 @@ public class Hero : MonoBehaviour, IDamageable
     protected DashState _dashState;
     private float _dashCurrentTime;
     private float _dashCurrentCooldown;
-    
+
     protected Vector2 _savedVelocity;
     protected StabState _stabState;
 
-    [Header("UI")] 
+    [Header("UI")]
     [SerializeField] private GameObject userInterface;
 
     protected virtual void Start()
     {
       	Instantiate(userInterface);
 		healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
-		
+
         _health = maxHealth;
 		walkSpeed = defaultWalkSpeed;
-        
+
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -77,7 +77,7 @@ public class Hero : MonoBehaviour, IDamageable
         {
             _health += Time.deltaTime * healthRegen;
         }
-        
+
         switch (_dashState)
         {
             case DashState.Ready:
@@ -110,7 +110,7 @@ public class Hero : MonoBehaviour, IDamageable
                 break;
         }
     }
-    
+
     protected virtual void FixedUpdate()
     {
         var velocity = new Vector2(_inputHorizontal, _inputVertical);
@@ -121,14 +121,14 @@ public class Hero : MonoBehaviour, IDamageable
         if (velocity.x < 0)
         {
             _spriteRenderer.flipX = true;
-            //sprint.GetComponent<SpriteRenderer>().flipX = true;
+            sprint.GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (velocity.x > 0)
         {
             _spriteRenderer.flipX = false;
-            //sprint.GetComponent<SpriteRenderer>().flipX = false;
+            sprint.GetComponent<SpriteRenderer>().flipX = false;
         }
-        
+
         if (_dashState == DashState.Dashing)
             _rigidbody.velocity = _savedVelocity.normalized * dashSpeed;
     }
@@ -158,7 +158,7 @@ public class Hero : MonoBehaviour, IDamageable
         else
             enemy.TakeDamage(damage, gameObject, DamageType.Physical);
     }
-    
+
     public void OnDeath(GameObject killer)
     {
         GameManager.Instance.StartGame(killer.GetComponent<Enemy>().hero);
