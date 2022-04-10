@@ -61,12 +61,12 @@ public class ImpHero : Hero
     [SerializeField] private LayerMask bigFireballDamageLayer;
     private bool _bigFireballOnCooldown = false;
     private float _bigFireballCurrentCooldown = 0f;
-    
+
     protected override void Start()
     {
         base.Start();
         _barrierCounter = GameObject.FindWithTag("Counter").GetComponent<TMP_Text>();
-        _pSprint = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
+        _pSprint = GameObject.FindWithTag("SprintBar").GetComponent<Slider>();
         _sprintCurrentDuration = sprintMaxDuration;
     }
 
@@ -78,23 +78,23 @@ public class ImpHero : Hero
         {
             sword.Attack();
         }
-        
+
         _sprintPercentage = (sprintMaxDuration - _sprintCurrentDuration) / sprintMaxDuration;
         _pSprint.value = _sprintPercentage;
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (!_fireSwordOnCooldown)
-            {    
+            {
                 _fireSwordOnCooldown = true;
                 _fireSwordCurrentCooldown = 0;
-                
+
                 sword.Attack("Burn", fireSwordSprite);
-                
+
                 Sprint(fireSwordSprintDuration);
             }
         }
-        
+
         if (_fireSwordOnCooldown)
         {
             _fireSwordCurrentCooldown += Time.deltaTime;

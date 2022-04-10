@@ -184,7 +184,7 @@ MonoBehaviour:
   flameBarrierDamageLayer:
     serializedVersion: 2
     m_Bits: 128
-  bigFireballPrefab: {fileID: 510593497170817105, guid: c8711b45f6fc6914c9bd6f698d62f3fd, type: 3}
+  bigFireballPrefab: {fileID: 9208735325294152099, guid: bbe9b5de08ea32a4bb40b2098acdf6d4, type: 3}
   bigFireballCooldown: 5
   bigFireballDamage: 50
   bigFireballDamageRadius: 3

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9c32642e649b7b447b1c8602cc347c7b
+guid: 51f0b67ec9e04604a8380817d7fa9b0f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -108,7 +108,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d2403c4601a23247820c76085e5c26a
-      internalID: 1729164836
+      spriteID: c93ab7e4a5993d543861798e9706acdb
+      internalID: 1945412192
       vertices: []
       indices: 
       edges: []
@@ -129,7 +129,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -139,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfccc9198a881694486667e00e36ea6c
-      internalID: -1622319696
+      spriteID: 87c92e13e6a3c7948be9f814267673df
+      internalID: 468787180
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -160,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aa4eda4749290c41865c4d81aede16a
-      internalID: -1057175725
+      spriteID: 578c2628c5666384b9bad85c0fdeaaf3
+      internalID: 442945498
       vertices: []
       indices: 
       edges: []
@@ -171,7 +171,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -181,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7aef65b6479c2aa4d9ebd191f401006b
-      internalID: -813259383
+      spriteID: bf4b56f1a83570e48a4c53e46de1ee69
+      internalID: -423181805
       vertices: []
       indices: 
       edges: []
@@ -192,6 +192,27 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdcea0c8e6b88f54cbf4092ac6c2f7e6
+      internalID: -972569631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_5
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 48
         width: 16
         height: 16
@@ -202,29 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee89780e3f440e143bf17229b420be82
-      internalID: -1079035103
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gather_Energy_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 00183b2a7466f0c46b430ad60edbd259
-      internalID: -152281943
+      spriteID: b4ab84f463cbb824b870f52916187912
+      internalID: -298285001
       vertices: []
       indices: 
       edges: []
@@ -234,7 +234,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 32
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -244,8 +244,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 110bfe2437e9bac4d9a31c662f04bc63
-      internalID: 1309718333
+      spriteID: a3abd3be69120a242bdb4b863a4bcc63
+      internalID: 1058174413
       vertices: []
       indices: 
       edges: []
@@ -255,7 +255,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -265,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9434c83de14cc14469b2eef593c7eb74
-      internalID: -876452516
+      spriteID: 54bf03152fb1f2d40a3df4cf604a0bf5
+      internalID: -1825766771
       vertices: []
       indices: 
       edges: []
@@ -276,7 +276,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 32
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -286,8 +286,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f61b737bb150d9146b6bcaa15cf95747
-      internalID: 2070339923
+      spriteID: 9990c76d7d048c54bac32d95c375075b
+      internalID: 52862065
       vertices: []
       indices: 
       edges: []
@@ -297,6 +297,27 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 366f9e72aae4bb54f9364c7e3ffdbdfa
+      internalID: -1081752147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_10
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 32
         width: 16
         height: 16
@@ -307,29 +328,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f535162f0e086864d90bf57aa3b45073
-      internalID: 337248696
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gather_Energy_10
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e2baa5fb99e4f3428f63b0947b1a3bb
-      internalID: -611041714
+      spriteID: d5b0b15b4998ea3418c3c223592512ef
+      internalID: 998573757
       vertices: []
       indices: 
       edges: []
@@ -339,6 +339,90 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389923d8df9ed59468065ece3c537673
+      internalID: -1428773561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca419283f94077d4c9ecced7eb166652
+      internalID: 1243557921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_13
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4997af128f5a2b4b8c2badbd2bd7032
+      internalID: -756846663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b16968795938ddd4b99945f44c2605a0
+      internalID: 1211178945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_15
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -349,14 +433,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 898456e25b0412743a474a9ebdfb7dde
-      internalID: 101594841
+      spriteID: e1b07c390868ba54881b73292e37ad03
+      internalID: 1639476204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_12
+      name: Gather_Energy_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 828adc3e5df783e4091534bd57eca4c9
+      internalID: -949719072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gather_Energy_17
       rect:
         serializedVersion: 2
         x: 32
@@ -370,14 +475,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9123bb529d6dfa4b83a3775bcb3152e
-      internalID: 382891653
+      spriteID: dd772be9e220e614ba19a13314661091
+      internalID: 808304833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_13
+      name: Gather_Energy_18
       rect:
         serializedVersion: 2
         x: 48
@@ -391,14 +496,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5f4a9826a8480047a6a15aa2524ccad
-      internalID: -1031905719
+      spriteID: 1c2d71b2e4a712c49ba1544721ef916c
+      internalID: 1255012756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_14
+      name: Gather_Energy_19
       rect:
         serializedVersion: 2
         x: 64
@@ -412,14 +517,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53adcddd9f17a534da14afe03c8a77d8
-      internalID: -1671154558
+      spriteID: 327874de5312cc04183ae9068b7f9afb
+      internalID: 2118249719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_15
+      name: Gather_Energy_20
       rect:
         serializedVersion: 2
         x: 0
@@ -433,14 +538,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fa3ab5c69d8a5e43b3e8322503e65a2
-      internalID: -23618666
+      spriteID: f613d09d8a4115c40bdee75b375798d0
+      internalID: -805228608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_16
+      name: Gather_Energy_21
       rect:
         serializedVersion: 2
         x: 16
@@ -454,14 +559,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2eaf3a7aef0635047a3894b6063c16e2
-      internalID: 336745239
+      spriteID: 99db073f35e60a44291b9cd4e2ba0507
+      internalID: -874327246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_17
+      name: Gather_Energy_22
       rect:
         serializedVersion: 2
         x: 32
@@ -475,14 +580,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 874f74026111e084692c9fa98a567b0d
-      internalID: -1877318136
+      spriteID: 69064cd0ef9377f4c8fe4372c35e2ac9
+      internalID: 1154328640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_18
+      name: Gather_Energy_23
       rect:
         serializedVersion: 2
         x: 48
@@ -496,14 +601,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f28e0c5cb1efe64409da86716110d8d8
-      internalID: 1127123582
+      spriteID: ff3d6510b3a1058418576a384e2f2fed
+      internalID: -218506383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gather_Energy_19
+      name: Gather_Energy_24
       rect:
         serializedVersion: 2
         x: 64
@@ -517,8 +622,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a0a28cd3a7460747b5f5b6be77cd74f
-      internalID: 452844023
+      spriteID: 79d7436b77138d64a87caea28f837993
+      internalID: -1280543466
       vertices: []
       indices: 
       edges: []
@@ -534,26 +639,31 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gather_Energy_19: 452844023
-      Gather_Energy_11: 101594841
-      Gather_Energy_5: -152281943
-      Gather_Energy_7: -876452516
-      Gather_Energy_15: -23618666
-      Gather_Energy_4: -1079035103
-      Gather_Energy_17: -1877318136
-      Gather_Energy_14: -1671154558
-      Gather_Energy_8: 2070339923
-      Gather_Energy_13: -1031905719
-      Gather_Energy_9: 337248696
-      Gather_Energy_12: 382891653
-      Gather_Energy_2: -1057175725
-      Gather_Energy_0: 1729164836
-      Gather_Energy_18: 1127123582
-      Gather_Energy_3: -813259383
-      Gather_Energy_10: -611041714
-      Gather_Energy_6: 1309718333
-      Gather_Energy_16: 336745239
-      Gather_Energy_1: -1622319696
+      Gather_Energy_19: 2118249719
+      Gather_Energy_11: -1428773561
+      Gather_Energy_5: -298285001
+      Gather_Energy_21: -874327246
+      Gather_Energy_20: -805228608
+      Gather_Energy_7: -1825766771
+      Gather_Energy_15: 1639476204
+      Gather_Energy_4: -972569631
+      Gather_Energy_23: -218506383
+      Gather_Energy_17: 808304833
+      Gather_Energy_14: 1211178945
+      Gather_Energy_8: 52862065
+      Gather_Energy_13: -756846663
+      Gather_Energy_9: -1081752147
+      Gather_Energy_12: 1243557921
+      Gather_Energy_2: 442945498
+      Gather_Energy_22: 1154328640
+      Gather_Energy_0: 1945412192
+      Gather_Energy_18: 1255012756
+      Gather_Energy_24: -1280543466
+      Gather_Energy_3: -423181805
+      Gather_Energy_10: 998573757
+      Gather_Energy_6: 1058174413
+      Gather_Energy_16: -949719072
+      Gather_Energy_1: 468787180
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

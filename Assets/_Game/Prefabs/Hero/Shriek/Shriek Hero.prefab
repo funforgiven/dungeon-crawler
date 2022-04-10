@@ -180,7 +180,7 @@ MonoBehaviour:
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15
-  userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c, type: 3}
+  userInterface: {fileID: 8453364889026819139, guid: a36bd1633bbead848a20e702f6712353, type: 3}
   sprintSpeed: 1.5
   sprintDuration: 3
   sprintCooldown: 3

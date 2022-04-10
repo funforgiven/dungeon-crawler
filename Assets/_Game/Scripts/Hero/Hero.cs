@@ -44,10 +44,11 @@ public class Hero : MonoBehaviour, IDamageable
 
     [Header("UI")]
     [SerializeField] private GameObject userInterface;
+      private GameObject ThisUI;
 
     protected virtual void Start()
     {
-      	Instantiate(userInterface);
+    	ThisUI = Instantiate(userInterface);
 		healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
         _health = maxHealth;
@@ -149,7 +150,7 @@ public class Hero : MonoBehaviour, IDamageable
     {
         if (damage == -1)
             damage = swordDamage;
-        
+
         int roll = Random.Range(0, 100);
         if (roll < critRate)
         {
@@ -161,7 +162,9 @@ public class Hero : MonoBehaviour, IDamageable
 
     public void OnDeath(GameObject killer)
     {
+      Destroy(gameObject);
+      Destroy(ThisUI);  
         GameManager.Instance.StartGame(killer.GetComponent<Enemy>().hero);
-        Destroy(gameObject);
+
     }
 }

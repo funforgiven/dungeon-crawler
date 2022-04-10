@@ -8,6 +8,7 @@ TagManager:
   - HPBar
   - MPBar
   - Counter
+  - SprintBar
   layers:
   - Default
   - TransparentFX
