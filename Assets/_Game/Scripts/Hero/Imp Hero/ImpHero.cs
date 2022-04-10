@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+using TMPro;
 
 public class ImpHero : Hero
 {
@@ -26,13 +28,14 @@ public class ImpHero : Hero
     private bool _fireballOnCooldown = false;
     private float _fireballCurrentCooldown = 0f;
 
-    [Header("Flame Barrier")] 
+    [Header("Flame Barrier")]
     [SerializeField] private float flameBarrierCooldown;
     [SerializeField] private int flameBarrierCharge = 3;
     [SerializeField] private float flameBarrierRegeneration = 2f;
     [SerializeField] private float flameBarrierDamage = 25f;
     [SerializeField] private float flameBarrierDamageRadius = 6f;
     [SerializeField] private LayerMask flameBarrierDamageLayer;
+    [SerializeField] private TMP_Text BarrierCounter;
     private int _flameBarrierCurrentCharge;
     private bool _flameBarrierActive;
     private bool _flameBarrierOnCooldown = false;
@@ -62,25 +65,25 @@ public class ImpHero : Hero
         {
             sword.Attack();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             sword.Attack("Burn");
         }
-            
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!_fireballOnCooldown)
             {
                 _fireballOnCooldown = true;
-                
+
                 _fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
 
                 var direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 _fireball.GetComponent<Rigidbody2D>().velocity = direction.normalized * fireballSpeed;
                 _fireball.GetComponent<Projectile>().owner = gameObject;
                 _fireball.GetComponent<Projectile>()._damage = fireballDamage;
-                
+
                 Sprint();
             }
         }
@@ -103,13 +106,13 @@ public class ImpHero : Hero
                 _flameBarrierActive = true;
                 _flameBarrierOnCooldown = true;
                 _flameBarrierCurrentCharge = flameBarrierCharge;
-                
+                BarrierCounter.text = _flameBarrierCurrentCharge.ToString();
                 _animator.SetBool("Flame Barrier", true);
-                
+
                 Sprint();
             }
         }
-        
+
         if (_flameBarrierOnCooldown)
         {
             _flameBarrierCurrentCooldown += Time.deltaTime;
@@ -134,17 +137,17 @@ public class ImpHero : Hero
 
                 var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 var overlap = Physics2D.OverlapCircleAll(location, bigFireballDamageRadius, bigFireballDamageLayer);
-                
+
                 foreach (var col in overlap)
                 {
                     var damageable = col.GetComponent<IDamageable>();
-                    if(damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
+                    if (damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
                 }
-                
+
                 Sprint();
             }
         }
-        
+
         if (_bigFireballOnCooldown)
         {
             _bigFireballCurrentCooldown += Time.deltaTime;
@@ -214,6 +217,7 @@ public class ImpHero : Hero
         if (_flameBarrierActive)
         {
             _flameBarrierCurrentCharge -= 1;
+              BarrierCounter.text = _flameBarrierCurrentCharge.ToString();
             if (_flameBarrierCurrentCharge == 0)
             {
                 _flameBarrierActive = false;
