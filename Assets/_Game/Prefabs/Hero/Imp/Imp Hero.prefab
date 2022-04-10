@@ -153,7 +153,7 @@ MonoBehaviour:
   critRate: 0
   critDamage: 200
   defaultWalkSpeed: 4
-  sprint: {fileID: 3368412660482134403, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
+  sprint: {fileID: 1339844991232329883}
   maxHealth: 100
   healthRegen: 1
   healthRegenCooldown: 3
@@ -163,20 +163,24 @@ MonoBehaviour:
   userInterface: {fileID: 8453364889026819139, guid: fd27177b302fb2c4588210994842227d, type: 3}
   fireDamageReduction: 0.5
   sprintSpeed: 1.5
-  sprintDuration: 3
-  fireSwordDamage: 3
-  fireSwordDuration: 4
-  fireSwordCooldown: 2
+  sprintMaxDuration: 8
+  burnDamage: 3
+  burnDuration: 4
+  burnInterval: 2
   fireSwordSprite: {fileID: 21300000, guid: 5a8bda32355192a4ba03fff3f68102bc, type: 3}
+  fireSwordSprintDuration: 1.5
+  fireSwordCooldown: 4
   fireballPrefab: {fileID: 7256436818530167315, guid: 3616783ed523c95409bd6b64922af275, type: 3}
   fireballCooldown: 2
   fireballSpeed: 12
   fireballDamage: 50
+  fireballSprintDuration: 4
   flameBarrierCooldown: 5
   flameBarrierCharge: 5
   flameBarrierRegeneration: 2
   flameBarrierDamage: 25
   flameBarrierDamageRadius: 1
+  flameBarrierSprintDuration: 4
   flameBarrierDamageLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -184,6 +188,7 @@ MonoBehaviour:
   bigFireballCooldown: 5
   bigFireballDamage: 50
   bigFireballDamageRadius: 3
+  bigFireballSprintDuration: 4
   bigFireballDamageLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -216,7 +221,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3368412660482134403, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
       propertyPath: m_Name
-      value: Sprint_Red_0
+      value: Sprint_Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 4633833561380324817, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4633833561380324817, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
       propertyPath: m_SortingOrder
@@ -268,6 +277,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
+--- !u!1 &1339844991232329883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3368412660482134403, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}
+  m_PrefabInstance: {fileID: 4334455828234508568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6739970855367260417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7038628499961978905, guid: 722e3583bc2fc2d4393303327eaa130c, type: 3}

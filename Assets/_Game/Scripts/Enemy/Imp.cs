@@ -23,5 +23,4 @@ public class Imp : Enemy
             fireballSpawned.target = _target;
         }
     }
-    
 }

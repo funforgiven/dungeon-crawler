@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class ShriekHero : Hero
 {
     internal List<Enemy> _markedEnemies = new List<Enemy>();
+    
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 1.5f;
     [SerializeField] private float sprintDuration = 4f;

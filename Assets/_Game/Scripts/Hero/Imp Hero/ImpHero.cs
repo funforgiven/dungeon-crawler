@@ -10,28 +10,30 @@ public class ImpHero : Hero
     [Header("Passive")]
     [SerializeField] private float fireDamageReduction = 0.5f;
     [SerializeField] private float sprintSpeed = 1.5f;
-    [SerializeField] private float sprintDuration = 3f;
-    private Slider PSprint;
+    [SerializeField] private float sprintMaxDuration = 8f;
+    private float _sprintPercentage;
+    private Slider _pSprint;
     private float _sprintCurrentDuration;
-    private bool _fireSwordOnCooldown = false;
-    [SerializeField] private float fireSwordCooldown = 10f;
-    private float _fireSwordCurrentCooldown = 0f;
-    
+
     [Header("Burn")]
     [SerializeField] private float burnDamage = 3f;
-
-    [Header("Fire Sword")]
-    [SerializeField] private Sprite fireSwordSprite;
     [SerializeField] private int burnDuration = 4;
     [SerializeField] private float burnInterval = 2f;
     private List<Enemy> _burningEnemies = new List<Enemy>();
 
+    [Header("Fire Sword")]
+    [SerializeField] private Sprite fireSwordSprite;
+    [SerializeField] private float fireSwordSprintDuration = 1.5f;
+    [SerializeField] private float fireSwordCooldown = 10f;
+    private bool _fireSwordOnCooldown = false;
+    private float _fireSwordCurrentCooldown = 0f;
 
     [Header("Fireball")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballCooldown = 10f;
     [SerializeField] private float fireballSpeed = 3f;
     [SerializeField] private float fireballDamage= 3f;
+    [SerializeField] private float fireballSprintDuration = 4f;
     private GameObject _fireball;
     private bool _fireballOnCooldown = false;
     private float _fireballCurrentCooldown = 0f;
@@ -42,6 +44,7 @@ public class ImpHero : Hero
     [SerializeField] private float flameBarrierRegeneration = 2f;
     [SerializeField] private float flameBarrierDamage = 25f;
     [SerializeField] private float flameBarrierDamageRadius = 6f;
+    [SerializeField] private float flameBarrierSprintDuration = 4f;
     [SerializeField] private LayerMask flameBarrierDamageLayer;
     private TMP_Text _barrierCounter;
     private int _flameBarrierCurrentCharge;
@@ -54,18 +57,17 @@ public class ImpHero : Hero
     [SerializeField] private float bigFireballCooldown = 5f;
     [SerializeField] private float bigFireballDamage = 25f;
     [SerializeField] private float bigFireballDamageRadius = 3f;
+    [SerializeField] private float bigFireballSprintDuration = 4f;
     [SerializeField] private LayerMask bigFireballDamageLayer;
     private bool _bigFireballOnCooldown = false;
     private float _bigFireballCurrentCooldown = 0f;
-
-
-
+    
     protected override void Start()
     {
         base.Start();
         _barrierCounter = GameObject.FindWithTag("Counter").GetComponent<TMP_Text>();
-        PSprint = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
-        _sprintCurrentDuration = sprintDuration;
+        _pSprint = GameObject.FindWithTag("MPBar").GetComponent<Slider>();
+        _sprintCurrentDuration = sprintMaxDuration;
     }
 
     protected override void Update()
@@ -77,15 +79,19 @@ public class ImpHero : Hero
             sword.Attack();
         }
         
-        PSprint.value = sprintDuration - _sprintCurrentDuration;
+        _sprintPercentage = (sprintMaxDuration - _sprintCurrentDuration) / sprintMaxDuration;
+        _pSprint.value = _sprintPercentage;
         
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (!_fireSwordOnCooldown)
-            {
-                sword.Attack("Burn", fireSwordSprite);
+            {    
                 _fireSwordOnCooldown = true;
                 _fireSwordCurrentCooldown = 0;
+                
+                sword.Attack("Burn", fireSwordSprite);
+                
+                Sprint(fireSwordSprintDuration);
             }
         }
         
@@ -113,7 +119,7 @@ public class ImpHero : Hero
                 _fireball.GetComponent<Projectile>().owner = gameObject;
                 _fireball.GetComponent<Projectile>()._damage = fireballDamage;
 
-                Sprint();
+                Sprint(fireballSprintDuration);
             }
         }
 
@@ -138,7 +144,7 @@ public class ImpHero : Hero
                 _barrierCounter.text = _flameBarrierCurrentCharge.ToString();
                 _animator.SetBool("Flame Barrier", true);
 
-                Sprint();
+                Sprint(flameBarrierSprintDuration);
             }
         }
 
@@ -178,7 +184,7 @@ public class ImpHero : Hero
                     }
                 }
 
-                Sprint();
+                Sprint(bigFireballSprintDuration);
             }
         }
 
@@ -194,24 +200,22 @@ public class ImpHero : Hero
             }
         }
 
-        if (_sprintCurrentDuration < sprintDuration)
+        if (_sprintCurrentDuration < sprintMaxDuration)
         {
-          sprint.GetComponent<SpriteRenderer>().enabled = true;
+            sprint.GetComponent<SpriteRenderer>().enabled = true;
             _sprintCurrentDuration += Time.deltaTime;
             walkSpeed = defaultWalkSpeed * sprintSpeed;
         }
         else
         {
-        sprint.GetComponent<SpriteRenderer>().enabled = false;
+            sprint.GetComponent<SpriteRenderer>().enabled = false;
             walkSpeed = defaultWalkSpeed;
         }
     }
 
-    private void Sprint()
+    private void Sprint(float duration)
     {
-        _sprintCurrentDuration = 0f;
-
-
+        _sprintCurrentDuration = Mathf.Clamp(_sprintCurrentDuration - duration, 0, sprintMaxDuration);
     }
 
     private IEnumerator Burn(Enemy enemy, float damage, int duration, float cooldown)
@@ -234,7 +238,7 @@ public class ImpHero : Hero
             }
 
             currentDuration--;
-            enemy.TakeDamage(damage, gameObject, DamageType.Fire);
+            enemy.TakeDamage(damage * (_sprintPercentage + 1), gameObject, DamageType.Fire);
             yield return new WaitForSeconds(cooldown);
         }
 
