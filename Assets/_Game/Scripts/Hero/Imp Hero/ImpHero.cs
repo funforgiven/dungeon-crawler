@@ -14,11 +14,13 @@ public class ImpHero : Hero
     private Slider PSprint;
     private float _sprintCurrentDuration;
 
-    [Header("Fire Sword")] 
+    [Header("Fire Sword")]
     [SerializeField] private float fireSwordDamage = 3f;
     [SerializeField] private int fireSwordDuration = 4;
     [SerializeField] private float fireSwordCooldown = 2f;
+    [SerializeField] private Sprite Flamingsword;
     private List<Enemy> _burningEnemies = new List<Enemy>();
+
 
     [Header("Fireball")]
     [SerializeField] private GameObject fireballPrefab;
@@ -188,10 +190,10 @@ public class ImpHero : Hero
             _burningEnemies.Add(enemy);
             yield break;
         }
-        
+
         _burningEnemies.Add(enemy);
         int currentDuration = duration;
-        
+
         while(currentDuration > 0)
         {
             if (_burningEnemies.Count(e => e != null && e.Equals(enemy)) == 2)
@@ -214,7 +216,7 @@ public class ImpHero : Hero
         {
             StartCoroutine(Burn(enemy, fireSwordDamage, fireSwordDuration, fireSwordCooldown));
         }
-        
+
         base.ApplyDamage(enemy, identifier);
     }
 
