@@ -18,7 +18,7 @@ public class ImpHero : Hero
     [SerializeField] private float fireSwordDamage = 3f;
     [SerializeField] private int fireSwordDuration = 4;
     [SerializeField] private float fireSwordCooldown = 2f;
-    [SerializeField] private Sprite Flamingsword;
+    [SerializeField] private Sprite fireSwordSprite;
     private List<Enemy> _burningEnemies = new List<Enemy>();
 
 
@@ -74,7 +74,7 @@ public class ImpHero : Hero
         PSprint.value = sprintDuration - _sprintCurrentDuration;
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            sword.Attack("Burn");
+            sword.Attack("Burn", fireSwordSprite);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))

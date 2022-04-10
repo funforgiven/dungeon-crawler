@@ -17,9 +17,7 @@ public class Sword : MonoBehaviour
     private void Start()
     {
         Disable();
-
         _swingDuration = defaultSwingDuration;
-
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
