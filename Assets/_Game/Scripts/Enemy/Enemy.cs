@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("Agent")]
     [HideInInspector] public NavMeshAgent _agent;
     protected bool _isShooting = false;
+    public bool _inCC = false;
     protected float _health;
     protected Transform _target;
     
@@ -46,11 +47,15 @@ public class Enemy : MonoBehaviour, IDamageable
         _animator.SetBool("Move", _agent.velocity.magnitude > 0);
         
         var distanceToPlayer = Vector2.Distance(_target.position, transform.position);
-        if (!_isShooting)
+
+        if (_inCC)
+        {
+            _isShooting = false;
+        }
+        else if (!_isShooting)
         {
             if (distanceToPlayer <= chaseRange)
             {
-                _agent.isStopped = true;
                 _agent.ResetPath();
                 _isShooting = true;
             }
@@ -58,7 +63,6 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 _agent.SetDestination(_target.position);
             }
-            
         }
         else
         {

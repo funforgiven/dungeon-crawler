@@ -177,10 +177,19 @@ MonoBehaviour:
   maxHealth: 100
   healthRegen: 1
   healthRegenCooldown: 3
+  dashCooldown: 5
+  dashTime: 0.2
+  dashSpeed: 15
   userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c, type: 3}
   sprintSpeed: 1.5
   sprintDuration: 3
   sprintCooldown: 3
+  aoeDamage: 10
+  aoeDamageRadius: 3
+  aoeCooldown: 5
+  aoeDamageLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &7938410519727055175
 GameObject:
   m_ObjectHideFlags: 0

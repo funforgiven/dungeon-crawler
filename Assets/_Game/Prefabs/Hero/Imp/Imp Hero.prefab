@@ -156,6 +156,9 @@ MonoBehaviour:
   maxHealth: 100
   healthRegen: 1
   healthRegenCooldown: 3
+  dashCooldown: 5
+  dashTime: 0.2
+  dashSpeed: 15
   userInterface: {fileID: 8453364889026819139, guid: fd27177b302fb2c4588210994842227d, type: 3}
   fireDamageReduction: 0.5
   sprintSpeed: 1.5
@@ -175,7 +178,7 @@ MonoBehaviour:
   flameBarrierDamageLayer:
     serializedVersion: 2
     m_Bits: 128
-  BigFireballPrefab: {fileID: 510593497170817105, guid: c8711b45f6fc6914c9bd6f698d62f3fd, type: 3}
+  bigFireballPrefab: {fileID: 510593497170817105, guid: c8711b45f6fc6914c9bd6f698d62f3fd, type: 3}
   bigFireballCooldown: 5
   bigFireballDamage: 50
   bigFireballDamageRadius: 3

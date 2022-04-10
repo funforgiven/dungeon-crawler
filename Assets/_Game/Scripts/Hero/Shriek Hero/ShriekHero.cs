@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ShriekHero : Hero
 {
@@ -15,10 +17,23 @@ public class ShriekHero : Hero
     internal bool _sprintActive = false;
     private bool _sprintOnCooldown = false;
     private float _sprintCurrentCooldown = 0f;
-    private float _sprintCurrentDuration;
+    private float _sprintCurrentDuration = 0f;
 
-    [Header("Curse")] 
-    [SerializeField] private float curseDamage = 3f;
+    [Header("AoE")] 
+    [SerializeField] private float aoeDamage = 10f;
+    [SerializeField] private float aoeDamageRadius = 3f;
+    [SerializeField] private float aoeCooldown = 5f;
+    [SerializeField] private LayerMask aoeDamageLayer;
+    private bool _aoeOnCooldown = false;
+    private float _aoeCurrentCooldown = 0f;
+    private float _aoeCurrentDuration = 0f;
+    
+    [Header("Fear")]
+    [SerializeField] private float fearCooldown = 5f;
+    [SerializeField] private float fearDuration = 2f;
+    private bool _fearOnCooldown = false;
+    private float _fearCurrentCooldown = 0f;
+    private float _fearCurrentDuration = 0f;
 
 
     protected override void Update()
@@ -66,8 +81,78 @@ public class ShriekHero : Hero
                 _sprintOnCooldown = false;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (!_aoeOnCooldown)
+            {
+                _aoeOnCooldown = true;
+                
+                var overlap = Physics2D.OverlapCircleAll(transform.position, aoeDamageRadius, aoeDamageLayer);
+
+                foreach (var col in overlap)
+                {
+                    var damageable = col.GetComponent<IDamageable>();
+                    if(damageable != null) damageable.TakeDamage(aoeDamage, gameObject, DamageType.Magical);
+                }
+            }
+        }
+
+        if (_aoeOnCooldown)
+        {
+            _aoeCurrentCooldown += Time.deltaTime;
+
+            if (_aoeCurrentCooldown > aoeCooldown)
+            {
+                _aoeCurrentCooldown = 0;
+                _aoeOnCooldown = false;
+            }
+        }
+        
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!_fearOnCooldown)
+            {
+                if (_markedEnemies.Count > 0)
+                {
+                    foreach (var enemy in _markedEnemies)
+                    {
+                        StartCoroutine(Fear(enemy));
+                    }
+
+                    _markedEnemies = new List<Enemy>();
+                }
+            }
+        }
+        
+        if (_fearOnCooldown)
+        {
+            _fearCurrentCooldown += Time.deltaTime;
+
+            if (_fearCurrentCooldown > fearCooldown)
+            {
+                _fearCurrentCooldown = 0;
+                _fearOnCooldown = false;
+            }
+        }
     }
 
+    private IEnumerator Fear(Enemy enemy)
+    {
+        var pos = enemy.transform.position;
+        var direction =  pos + pos - transform.position;
+        Vector3 runPosition = direction.normalized * 5f;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(runPosition, out hit, 5, 1);
+        
+        enemy._agent.SetDestination(hit.position);
+        
+        enemy._inCC = true;
+        yield return new WaitForSeconds(fearDuration);
+        enemy._inCC = false;
+    }
     public override void ApplyDamage(Enemy enemy, string identifier)
     {
         base.ApplyDamage(enemy, identifier);
