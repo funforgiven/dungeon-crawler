@@ -1,10 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ImpHero : Hero
 {
     [Header("Passive")]
     [SerializeField] private float fireDamageReduction = 0.5f;
-    
+    [SerializeField] private float sprintSpeed = 1.5f;
+    [SerializeField] private float sprintDuration = 3f;
+    private float _sprintCurrentDuration;
+
+    [Header("Fire Sword")] 
+    [SerializeField] private float fireSwordDamage = 3f;
+    [SerializeField] private int fireSwordDuration = 4;
+    [SerializeField] private float fireSwordCooldown = 2f;
+    private List<Enemy> _burningEnemies = new List<Enemy>();
+
     [Header("Fireball")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float fireballCooldown = 10f;
@@ -38,12 +50,24 @@ public class ImpHero : Hero
     protected override void Start()
     {
         base.Start();
+
+        _sprintCurrentDuration = sprintDuration;
     }
 
     protected override void Update()
     {
         base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            sword.Attack();
+        }
         
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            sword.Attack("Burn");
+        }
+            
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!_fireballOnCooldown)
@@ -56,6 +80,8 @@ public class ImpHero : Hero
                 _fireball.GetComponent<Rigidbody2D>().velocity = direction.normalized * fireballSpeed;
                 _fireball.GetComponent<Projectile>().owner = gameObject;
                 _fireball.GetComponent<Projectile>()._damage = fireballDamage;
+                
+                Sprint();
             }
         }
 
@@ -79,6 +105,8 @@ public class ImpHero : Hero
                 _flameBarrierCurrentCharge = flameBarrierCharge;
                 
                 _animator.SetBool("Flame Barrier", true);
+                
+                Sprint();
             }
         }
         
@@ -112,6 +140,8 @@ public class ImpHero : Hero
                     var damageable = col.GetComponent<IDamageable>();
                     if(damageable != null) damageable.TakeDamage(bigFireballDamage, gameObject, DamageType.Magical);
                 }
+                
+                Sprint();
             }
         }
         
@@ -125,8 +155,60 @@ public class ImpHero : Hero
                 _bigFireballOnCooldown = false;
             }
         }
+
+        if (_sprintCurrentDuration < sprintDuration)
+        {
+            _sprintCurrentDuration += Time.deltaTime;
+            walkSpeed = defaultWalkSpeed * sprintSpeed;
+        }
+        else
+        {
+            walkSpeed = defaultWalkSpeed;
+        }
     }
-    
+
+    private void Sprint()
+    {
+        _sprintCurrentDuration = 0f;
+    }
+
+    private IEnumerator Burn(Enemy enemy, float damage, int duration, float cooldown)
+    {
+        if (_burningEnemies.Contains(enemy))
+        {
+            _burningEnemies.Add(enemy);
+            yield break;
+        }
+        
+        _burningEnemies.Add(enemy);
+        int currentDuration = duration;
+        
+        while(currentDuration > 0)
+        {
+            if (_burningEnemies.Count(e => e != null && e.Equals(enemy)) == 2)
+            {
+                _burningEnemies.Remove(enemy);
+                currentDuration = duration;
+            }
+
+            currentDuration--;
+            enemy.TakeDamage(damage, gameObject, DamageType.Fire);
+            yield return new WaitForSeconds(cooldown);
+        }
+
+        _burningEnemies.Remove(enemy);
+    }
+
+    public override void ApplyDamage(Enemy enemy, string identifier)
+    {
+        if (identifier == "Burn")
+        {
+            StartCoroutine(Burn(enemy, fireSwordDamage, fireSwordDuration, fireSwordCooldown));
+        }
+        
+        base.ApplyDamage(enemy, identifier);
+    }
+
     public override void TakeDamage(float damage, GameObject damager, DamageType damageType)
     {
         if (_flameBarrierActive)

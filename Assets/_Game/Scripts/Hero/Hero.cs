@@ -4,9 +4,12 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour, IDamageable
 {
     [Header("Attack")]
-    [SerializeField] protected GameObject currentWeapon;
+    [SerializeField] protected GameObject swordPrefab;
+    [SerializeField] protected float swordDamage = 10f;
     [SerializeField] public float critRate = 0f;
     [SerializeField] public float critDamage = 200f;
+
+    protected Sword sword;
 
     [Header("Movement")]
     [SerializeField] protected float defaultWalkSpeed = 4f;
@@ -25,6 +28,7 @@ public class Hero : MonoBehaviour, IDamageable
     private float _healthRegenCurrentCooldown = 0f;
     protected float _health;
     private Slider healthBar;
+    private bool isDead = false;
 
     [Header("UI")] 
     [SerializeField] private GameObject userInterface;
@@ -41,9 +45,11 @@ public class Hero : MonoBehaviour, IDamageable
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
 
-        currentWeapon = Instantiate(currentWeapon, transform.position, Quaternion.identity);
-        currentWeapon.transform.SetParent(transform);
-        currentWeapon.GetComponent<Weapon>().owner = this;
+        swordPrefab = Instantiate(swordPrefab, transform.position, Quaternion.identity);
+        swordPrefab.transform.SetParent(transform);
+
+        sword = swordPrefab.GetComponent<Sword>();
+        sword.owner = this;
     }
 
     // Update is called once per frame
@@ -53,11 +59,6 @@ public class Hero : MonoBehaviour, IDamageable
         _inputHorizontal = Input.GetAxisRaw("Horizontal");
         _inputVertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            currentWeapon.GetComponent<Weapon>().Attack();
-        }
-        
         _healthRegenCurrentCooldown += Time.deltaTime;
 
         if (_healthRegenCurrentCooldown > healthRegenCooldown)
@@ -76,12 +77,12 @@ public class Hero : MonoBehaviour, IDamageable
         if (velocity.x < 0)
         {
             _spriteRenderer.flipX = true;
-            sprint.GetComponent<SpriteRenderer>().flipX = true;
+            //sprint.GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (velocity.x > 0)
         {
             _spriteRenderer.flipX = false;
-            sprint.GetComponent<SpriteRenderer>().flipX = false;
+            //sprint.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 
@@ -89,10 +90,26 @@ public class Hero : MonoBehaviour, IDamageable
     {
         _health -= damage;
         _healthRegenCurrentCooldown = 0f;
-        
-        if (_health <= 0) OnDeath(damager);
+
+        if (!isDead && _health <= 0)
+        {
+            isDead = true;
+            OnDeath(damager);
+        }
     }
 
+    public virtual void ApplyDamage(Enemy enemy, string identifier)
+    {
+        
+        int roll = Random.Range(0, 100);
+        if (roll < critRate)
+        {
+            enemy.TakeDamage(swordDamage * (critDamage/100), gameObject, DamageType.Physical);
+        }
+        else
+            enemy.TakeDamage(swordDamage, gameObject, DamageType.Physical);
+    }
+    
     public void OnDeath(GameObject killer)
     {
         GameManager.Instance.StartGame(killer.GetComponent<Enemy>().hero);

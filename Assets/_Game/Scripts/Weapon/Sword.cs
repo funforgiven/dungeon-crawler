@@ -1,14 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class Sword : Weapon
+public class Sword : MonoBehaviour
 {
     [SerializeField] private float swingAngle = 90f;
     [SerializeField] public float defaultSwingDuration = 0.5f;
+    
+    internal Hero owner;
+    
     internal float _swingDuration;
-
     private bool _canSwing = true;
-
+    private string _identifier = "";
+    
     private void Start()
     {
         Disable();
@@ -16,10 +19,13 @@ public class Sword : Weapon
         _swingDuration = defaultSwingDuration;
     }
 
-    public override void Attack()
+    public void Attack(string identifier = "")
     {
-        if(_canSwing)
+        if (_canSwing)
+        {
+            _identifier = identifier;
             StartCoroutine(Swing());
+        }
     }
 
     IEnumerator Swing()
@@ -49,6 +55,18 @@ public class Sword : Weapon
     private void OnTriggerEnter2D(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        if(enemy) ApplyDamage(col.GetComponent<Enemy>());
+        if(enemy) owner.GetComponent<Hero>().ApplyDamage(col.GetComponent<Enemy>(), _identifier);
+    }
+    
+    public void Enable()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void Disable()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }

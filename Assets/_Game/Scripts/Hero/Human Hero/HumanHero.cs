@@ -29,7 +29,7 @@ public class HumanHero : Hero
     private float _manaBallCurrentCooldown = 0f;
 
     [Header("Run")]
-    [SerializeField] private float hasteRunSpeed = 12f;
+    [SerializeField] private float hasteRunSpeed = 1.5f;
     [SerializeField] private float hasteSwingSpeed = 2f;
     [SerializeField] private float hasteManaCost = 1f;
     private bool _inHaste = false;
@@ -65,6 +65,11 @@ public class HumanHero : Hero
     protected override void Update()
     {
         base.Update();
+        
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            sword.Attack();
+        }
 
         mana += Time.deltaTime * manaRegen;
         manaBar.value = mana / maxMana;
@@ -85,7 +90,7 @@ public class HumanHero : Hero
                 _dashCurrentTime += Time.deltaTime;
                 if(_dashCurrentTime >= dashTime)
                 {
-                    currentWeapon.GetComponent<Weapon>().Disable();
+                    sword.Disable();
                     _dashCurrentTime = 0f;
                     _dashState = DashState.Cooldown;
                 }
@@ -106,11 +111,10 @@ public class HumanHero : Hero
                 if(Input.GetKeyDown(KeyCode.Mouse1) && _dashState != DashState.Dashing)
                 {
                     _savedVelocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-
-                    var weapon = currentWeapon.GetComponent<Weapon>();
-                    weapon.Enable();
+                    
+                    sword.Enable();
                     var rotZ = Mathf.Atan2(_savedVelocity.y, _savedVelocity.x) * Mathf.Rad2Deg;
-                    weapon.transform.rotation = Quaternion.Euler(0, 0, rotZ - 90f);
+                    sword.transform.rotation = Quaternion.Euler(0, 0, rotZ - 90f);
 
                     _stabState = StabState.Stabbing;
                 }
@@ -119,7 +123,7 @@ public class HumanHero : Hero
                 _stabCurrentTime += Time.deltaTime;
                 if(_stabCurrentTime >= stabTime)
                 {
-                    currentWeapon.GetComponent<Weapon>().Disable();
+                    sword.Disable();
                     _stabCurrentTime = 0f;
                     _stabState = StabState.Cooldown;
                 }
@@ -162,16 +166,14 @@ public class HumanHero : Hero
         {
             _inHaste = true;
 
-            walkSpeed = hasteRunSpeed;
-            var sword = currentWeapon.GetComponent<Sword>();
-            currentWeapon.GetComponent<Sword>()._swingDuration = (1/hasteSwingSpeed) * sword.defaultSwingDuration;
+            walkSpeed = defaultWalkSpeed * hasteRunSpeed;
+            sword._swingDuration = (1/hasteSwingSpeed) * sword.defaultSwingDuration;
             sprint.GetComponent<SpriteRenderer>().enabled = true;
         }
         else if (Input.GetKeyUp(KeyCode.R))
         {
             _inHaste = false;
             walkSpeed = defaultWalkSpeed;
-            var sword = currentWeapon.GetComponent<Sword>();
             sword._swingDuration = sword.defaultSwingDuration;
             sprint.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -186,7 +188,6 @@ public class HumanHero : Hero
                 _inHaste = false;
 
                 walkSpeed = defaultWalkSpeed;
-                var sword = currentWeapon.GetComponent<Sword>();
                 sword._swingDuration = sword.defaultSwingDuration;
                 sprint.GetComponent<SpriteRenderer>().enabled = false;
             }

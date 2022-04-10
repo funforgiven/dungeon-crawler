@@ -168,7 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5969ad5d565c38244adb213ee3567e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
+  swordPrefab: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
+  swordDamage: 10
   critRate: 0
   critDamage: 200
   defaultWalkSpeed: 4
