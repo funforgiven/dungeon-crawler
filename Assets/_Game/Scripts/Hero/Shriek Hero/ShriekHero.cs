@@ -13,6 +13,7 @@ public class ShriekHero : Hero
     [SerializeField] private float sprintSpeed = 1.5f;
     [SerializeField] private float sprintDuration = 4f;
     [SerializeField] private float sprintCooldown = 3f;
+    [SerializeField] [Range(0, 1)] private float sprintOpacity = 0.5f;
     internal bool _sprintActive = false;
     private bool _sprintOnCooldown = false;
     private float _sprintCurrentCooldown = 0f;
@@ -63,6 +64,8 @@ public class ShriekHero : Hero
                 
                 walkSpeed = defaultWalkSpeed * sprintSpeed;
                 Physics2D.IgnoreLayerCollision(6, 7, true);
+                var col = _spriteRenderer.color;
+                _spriteRenderer.color = new Color(col.r, col.b, col.g, sprintOpacity);
             }
         }
 
@@ -75,6 +78,8 @@ public class ShriekHero : Hero
                 
                 walkSpeed = defaultWalkSpeed;
                 Physics2D.IgnoreLayerCollision(6, 7, false);
+                var col = _spriteRenderer.color;
+                _spriteRenderer.color = new Color(col.r, col.b, col.g, 1);
             }
         }
             

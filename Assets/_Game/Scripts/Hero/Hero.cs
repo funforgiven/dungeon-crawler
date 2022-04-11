@@ -18,7 +18,7 @@ public class Hero : MonoBehaviour, IDamageable
     protected float _inputHorizontal;
     protected float _inputVertical;
     protected Rigidbody2D _rigidbody;
-    private SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
 
     [Header("Health")]

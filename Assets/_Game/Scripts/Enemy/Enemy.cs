@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -20,7 +21,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
-    [SerializeField] private Canvas _healthCanvas;
+    [SerializeField] private Canvas healthCanvas;
+    [SerializeField] private float healthBarOffset = 20f;
     private Slider _healthBar;
 
     [Header("Hero")]
@@ -31,9 +33,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
-        _healthCanvas = Instantiate(_healthCanvas, transform, true);
-        _healthCanvas.worldCamera = Camera.main;
-        _healthBar = _healthCanvas.GetComponentInChildren<Slider>();
+        healthCanvas = Instantiate(healthCanvas, transform.position, Quaternion.identity);
+        healthCanvas.transform.SetParent(transform);
+        _healthBar = healthCanvas.GetComponentInChildren<Slider>();
+        _healthBar.transform.position = new Vector3(0, healthBarOffset, 0);
         
         _target = GameObject.FindWithTag("Player").transform;
 

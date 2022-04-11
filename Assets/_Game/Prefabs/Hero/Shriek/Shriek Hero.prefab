@@ -184,6 +184,7 @@ MonoBehaviour:
   sprintSpeed: 1.5
   sprintDuration: 3
   sprintCooldown: 3
+  sprintOpacity: 0.323
   aoeDamage: 10
   aoeDamageRadius: 3
   aoeCooldown: 5

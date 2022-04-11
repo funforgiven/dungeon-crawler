@@ -153,7 +153,8 @@ MonoBehaviour:
   chaseRange: 5
   shootRange: 7
   maxHealth: 100
-  _healthCanvas: {fileID: 2126704735558808770, guid: 7225e7b58c059c24a99163da7a667da4, type: 3}
+  healthCanvas: {fileID: 2956869105520665669, guid: 7225e7b58c059c24a99163da7a667da4, type: 3}
+  healthBarOffset: 20
   hero: {fileID: 3063979139153698202, guid: de28ad9116ef38847ab1bdc89a26477f, type: 3}
   _event: {fileID: 0}
   fireball: {fileID: 6193219432356453055, guid: 17a8ce8788d72864f869fbd17f90f6c5, type: 3}
