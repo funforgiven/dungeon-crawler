@@ -167,7 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df8b5b996ebe4d4fb58fdd53c919907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordPrefab: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
+  swordPrefab: {fileID: 4648420519848117709, guid: 3c0e1775b7e83a64296e710987854503,
+    type: 3}
+  swordPrefab: {guid: 3c0e1775b7e83a64296e710987854503, type: 3}
+  swordPrefab: {fileID: 0, guid: 3c0e1775b7e83a64296e710987854503, type: 3}
   swordDamage: 10
   critRate: 0
   critDamage: 200
@@ -179,4 +182,8 @@ MonoBehaviour:
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15
-  userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c, type: 3}
+  userInterface: {fileID: 8453364889026819139, guid: 3b86c48070d8b77479331cae272ed74c,
+    type: 3}
+  userInterface: {fileID: 8453364889026819139, type: 3}
+  userInterface: {fileID: 8453364889026819139, guid: 36ec8ec8bcb27d147908a5743d46dcb9,
+    type: 3}

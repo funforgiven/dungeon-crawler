@@ -9,6 +9,7 @@ TagManager:
   - MPBar
   - Counter
   - SprintBar
+  - Enemy
   layers:
   - Default
   - TransparentFX
