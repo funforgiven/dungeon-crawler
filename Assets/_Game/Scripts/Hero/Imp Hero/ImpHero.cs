@@ -245,14 +245,14 @@ public class ImpHero : Hero
         _burningEnemies.Remove(enemy);
     }
 
-    public override void ApplyDamage(Enemy enemy, string identifier = null, float damage = -1)
+    public override void ApplyDamage(Enemy enemy, string identifier = null, float damage = -1, DamageType damageType = DamageType.Physical)
     {
         if (identifier == "Burn")
         {
             StartCoroutine(Burn(enemy, burnDamage, burnDuration, burnInterval));
         }
 
-        base.ApplyDamage(enemy, identifier, damage);
+        base.ApplyDamage(enemy, identifier, damage, damageType);
     }
 
     public override void TakeDamage(float damage, GameObject damager, DamageType damageType)

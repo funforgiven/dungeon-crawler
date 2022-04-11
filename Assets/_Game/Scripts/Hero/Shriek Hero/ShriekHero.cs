@@ -201,12 +201,12 @@ public class ShriekHero : Hero
         yield return new WaitForSeconds(fearDuration);
         enemy._inCC = false;
     }
-    public override void ApplyDamage(Enemy enemy, string identifier, float damage = -1)
+    public override void ApplyDamage(Enemy enemy, string identifier, float damage = -1, DamageType damageType = DamageType.Physical)
     {
         if (_curseActive && _cursedEnemies.Contains(enemy))
             base.ApplyDamage(enemy, identifier, swordDamage + curseDamage);
         else
-            base.ApplyDamage(enemy, identifier, damage);
+            base.ApplyDamage(enemy, identifier, damage, damageType);
         
         
         if (identifier == "Mark")

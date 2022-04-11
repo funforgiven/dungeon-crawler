@@ -6,8 +6,10 @@ public class Hero : MonoBehaviour, IDamageable
     [Header("Attack")]
     [SerializeField] protected GameObject swordPrefab;
     [SerializeField] protected float swordDamage = 10f;
-    [SerializeField] public float critRate = 0f;
-    [SerializeField] public float critDamage = 200f;
+    [SerializeField] public float defaultCritRate = 0f;
+    [SerializeField] public float defaultCritDamage = 200f;
+    public float critRate;
+    public float critDamage;
 
     protected Sword sword;
 
@@ -19,6 +21,7 @@ public class Hero : MonoBehaviour, IDamageable
     protected float _inputVertical;
     protected Rigidbody2D _rigidbody;
     protected SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer _sprintSpriteRenderer;
     protected Animator _animator;
 
     [Header("Health")]
@@ -53,9 +56,12 @@ public class Hero : MonoBehaviour, IDamageable
 
         _health = maxHealth;
 		walkSpeed = defaultWalkSpeed;
+        critRate = defaultCritRate;
+        critDamage = defaultCritDamage;
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        if(sprint) _sprintSpriteRenderer = sprint.GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
 
         swordPrefab = Instantiate(swordPrefab, transform.position, Quaternion.identity);
@@ -122,12 +128,14 @@ public class Hero : MonoBehaviour, IDamageable
         if (velocity.x < 0)
         {
             _spriteRenderer.flipX = true;
-            sprint.GetComponent<SpriteRenderer>().flipX = true;
+            if (_sprintSpriteRenderer)
+                _sprintSpriteRenderer.flipX = true;
         }
         else if (velocity.x > 0)
         {
             _spriteRenderer.flipX = false;
-            sprint.GetComponent<SpriteRenderer>().flipX = false;
+            if (_sprintSpriteRenderer)
+                _sprintSpriteRenderer.flipX = false;
         }
 
         if (_dashState == DashState.Dashing)
@@ -146,7 +154,7 @@ public class Hero : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void ApplyDamage(Enemy enemy, string identifier, float damage = -1)
+    public virtual void ApplyDamage(Enemy enemy, string identifier, float damage = -1, DamageType damageType = DamageType.Physical)
     {
         if (damage == -1)
             damage = swordDamage;
@@ -154,10 +162,10 @@ public class Hero : MonoBehaviour, IDamageable
         int roll = Random.Range(0, 100);
         if (roll < critRate)
         {
-            enemy.TakeDamage(damage * (critDamage/100), gameObject, DamageType.Physical);
+            enemy.TakeDamage(damage * (critDamage/100), gameObject, damageType);
         }
         else
-            enemy.TakeDamage(damage, gameObject, DamageType.Physical);
+            enemy.TakeDamage(damage, gameObject, damageType);
     }
 
     public void OnDeath(GameObject killer)

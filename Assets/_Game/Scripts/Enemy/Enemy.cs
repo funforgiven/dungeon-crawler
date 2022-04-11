@@ -16,8 +16,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
+    [Header("Movement")]
     [SerializeField] protected float chaseRange = 5f;
     [SerializeField] protected float shootRange = 7f;
+    [SerializeField] protected float defaultWalkSpeed = 3f;
 
     [Header("Health")]
     [SerializeField] protected float maxHealth = 100;
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
         healthCanvas = Instantiate(healthCanvas, transform.position, Quaternion.identity);
         healthCanvas.transform.SetParent(transform);
         _healthBar = healthCanvas.GetComponentInChildren<Slider>();
-        _healthBar.transform.position = new Vector3(0, healthBarOffset, 0);
+        _healthBar.transform.localPosition = new Vector3(0, healthBarOffset, 0);
         
         _target = GameObject.FindWithTag("Player").transform;
 
@@ -47,6 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+        _agent.speed = defaultWalkSpeed;
 
         _health = maxHealth;
     }
