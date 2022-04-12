@@ -4,19 +4,16 @@ using UnityEngine;
 public class Imp : Enemy
 {
     [SerializeField] private GameObject fireball;
-    [SerializeField] private float fireRate = 20f;
 
-    private float _fireballTimeElapsed = 0;
-    
     protected override void Update()
     {
         base.Update();
         
-        _fireballTimeElapsed += Time.deltaTime;
+        _attackTimeElapsed += Time.deltaTime;
         
-        if (_isShooting && _fireballTimeElapsed > 60 / fireRate)
+        if (_isAttacking && _attackTimeElapsed > 60 / attackRate)
         {
-            _fireballTimeElapsed = 0;
+            _attackTimeElapsed = 0;
 
             var fireballSpawned = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<Fireball>();
             fireballSpawned.owner = this;

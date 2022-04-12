@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Hero : MonoBehaviour, IDamageable
@@ -170,9 +171,7 @@ public class Hero : MonoBehaviour, IDamageable
 
     public void OnDeath(GameObject killer)
     {
-      Destroy(gameObject);
-      Destroy(ThisUI);  
-        GameManager.Instance.StartGame(killer.GetComponent<Enemy>().hero);
-
+        GameManager.Instance.player = killer.GetComponent<Enemy>().hero;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

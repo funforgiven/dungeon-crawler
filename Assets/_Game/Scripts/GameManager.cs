@@ -1,48 +1,44 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject followCamera;
+    [SerializeField] public GameObject player;
 
     [SerializeField] private Vector2 spawnPosition;
     
     public static GameManager Instance { get; private set; }
-
     
-    // Start is called before the first frame update
     void Awake()
     {
         if (Instance != null && Instance != this) 
         { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
+            Destroy(gameObject);
         }
-        
-        StartGame();
+        else 
+        {
+            Instance = this;
+            
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartGame();
+    }
+    
     private void StartGame()
     {
         SpawnPlayer();
         AttachCamera();
     }
-    
-    public void StartGame(GameObject hero)
-    {
-        player = hero;
-        SpawnPlayer();
-        AttachCamera();
-    }
-    
+
     private void SpawnPlayer()
     {
         player = Instantiate(player, spawnPosition, Quaternion.identity);
@@ -51,7 +47,7 @@ public class GameManager : MonoBehaviour
     
     private void AttachCamera()
     {
-        var cinemachine = followCamera.GetComponent<CinemachineVirtualCamera>();
+        var cinemachine = Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
         cinemachine.Follow = player.transform;
     }
 }
