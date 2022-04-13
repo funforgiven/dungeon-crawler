@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject player;
     [SerializeField] private Vector2 spawnPosition;
-    [SerializeField] private GameObject respawnSword;
-
+    [SerializeField] private GameObject respawnSword; 
+    
+    private GameObject oldPlayer;
     private GameObject _player;
+
 
     public static GameManager Instance { get; private set; }
     
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
             
             SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(gameObject);
+
+            oldPlayer = player;
         }
     }
 
@@ -45,10 +49,10 @@ public class GameManager : MonoBehaviour
 
     private void StartDeathScene()
     {
-        SpawnPlayer();
+        SpawnOldPlayer();
         
         var enemySpawnPosition = new Vector2(spawnPosition.x + 7.5f, spawnPosition.y);
-        var enemy = Instantiate(_player.GetComponent<Hero>().enemy, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>();
+        var enemy = Instantiate(player.GetComponent<Hero>().enemy, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>();
         enemy.GetComponent<Animator>().SetBool("Move", true);
         enemy.enabled = false;
 
@@ -78,6 +82,12 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer()
     {
         _player = Instantiate(player, spawnPosition, Quaternion.identity);
+    }
+
+    private void SpawnOldPlayer()
+    {
+        _player = Instantiate(oldPlayer, spawnPosition, Quaternion.identity);
+        oldPlayer = player;
     }
     
     private void AttachCamera()

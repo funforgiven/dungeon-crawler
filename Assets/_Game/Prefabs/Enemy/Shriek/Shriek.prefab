@@ -115,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082405413392751906}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c58ae51d2a3cfd543b9333edf888767c, type: 3}
   m_Name: 
@@ -132,7 +132,6 @@ MonoBehaviour:
   swordPrefab: {fileID: 0}
   swordDamage: 0
   hero: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
-  enemy: {fileID: 2082405413392751906}
   _event: {fileID: 0}
   aoeDamage: 15
   aoeDamageRadius: 3

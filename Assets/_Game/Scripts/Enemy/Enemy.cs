@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour, IDamageable
     
     [Header("Hero")]
     [SerializeField] public GameObject hero;
-    [SerializeField] public GameObject enemy;
 
     [Header("Event")]
     public Event _event = null;

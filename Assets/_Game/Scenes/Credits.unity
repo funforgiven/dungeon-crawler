@@ -277,7 +277,7 @@ MonoBehaviour:
         m_MethodName: SpawnHero
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2082405413392751906, guid: dd0a1fafc2ed79946be54c1de8534639, type: 3}
+          m_ObjectArgument: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
         m_MethodName: SpawnHero
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6371360691702374924, guid: ffcbdace1e0d2a747b68a6dda8ba89b6, type: 3}
+          m_ObjectArgument: {fileID: 3063979139153698202, guid: de28ad9116ef38847ab1bdc89a26477f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1713,7 +1713,7 @@ MonoBehaviour:
         m_MethodName: SpawnHero
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 318028769489470910, guid: 65b873f7241cf894abfc468f841ef04a, type: 3}
+          m_ObjectArgument: {fileID: 310103054564883480, guid: 9ba2fe366b5d160489562ffaa746b921, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1769,6 +1769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4992943191869359782, guid: 2b145e6dc41484245826a723f948ae1c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 128004969411625493, guid: e5f9efe5bd44d38459d99ac5e1ff2f28, type: 3}
     - target: {fileID: 4992943191869359783, guid: 2b145e6dc41484245826a723f948ae1c, type: 3}
       propertyPath: m_RootOrder
       value: 3
