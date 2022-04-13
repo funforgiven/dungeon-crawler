@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (SceneManager.GetActiveScene().name == "Tutorial map1") return;
         StartGame();
     }
     
@@ -43,7 +44,6 @@ public class GameManager : MonoBehaviour
     {
         player = Instantiate(player, spawnPosition, Quaternion.identity);
     }
-    
     
     private void AttachCamera()
     {

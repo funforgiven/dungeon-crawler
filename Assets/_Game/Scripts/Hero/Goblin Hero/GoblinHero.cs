@@ -155,7 +155,6 @@ public class GoblinHero : Hero
         if (_evasionOnCooldown)
         {
             _evasionCurrentCooldown += Time.deltaTime;
-
             if (_evasionCurrentCooldown > evasionCooldown)
             {
                 _evasionCurrentCooldown = 0;

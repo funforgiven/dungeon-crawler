@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67b03b23624c4c43a8581c5e71990a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 128004969411625493, guid: e5f9efe5bd44d38459d99ac5e1ff2f28, type: 3}
-  followCamera: {fileID: 0}
+  player: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
   spawnPosition: {x: 0, y: 0}
 --- !u!114 &5601872129422926158
 MonoBehaviour:
