@@ -109,6 +109,7 @@ public class GoblinHero : Hero
         if (_sprintActive)
         {
             _sprintCurrentDuration += Time.deltaTime;
+            qDuration.fillAmount = (sprintDuration - _sprintCurrentDuration) / sprintDuration;
             if (_sprintCurrentDuration > sprintDuration)
             {
                 _sprintActive = false;
@@ -120,7 +121,7 @@ public class GoblinHero : Hero
         if (_sprintOnCooldown)
         {
             _sprintCurrentCooldown += Time.deltaTime;
-
+            qCooldown.fillAmount = (sprintCooldown - _sprintCurrentCooldown) / sprintCooldown;
             if (_sprintCurrentCooldown > sprintCooldown)
             {
                 _sprintCurrentCooldown = 0;

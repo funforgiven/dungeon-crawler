@@ -11,7 +11,6 @@ public class Hero : MonoBehaviour, IDamageable
     [SerializeField] public float defaultCritDamage = 200f;
     public float critRate;
     public float critDamage;
-
     protected Sword sword;
 
     [Header("Movement")]
@@ -47,12 +46,21 @@ public class Hero : MonoBehaviour, IDamageable
     protected StabState _stabState;
 
     [Header("UI")]
-    [SerializeField] private GameObject userInterface;
-      private GameObject ThisUI;
+    [SerializeField] protected GameObject userInterface;
+    [SerializeField] protected Image qDuration;
+    [SerializeField] protected Image qCooldown;
+    [SerializeField] protected Image eDuration;
+    [SerializeField] protected Image eCooldown;
+    [SerializeField] protected Image rDuration;
+    [SerializeField] protected Image rCooldown;
+    [SerializeField] protected Image rcDuration;
+    [SerializeField] protected Image rcCooldown;
+    [SerializeField] protected Image spaceDuration;
+    [SerializeField] protected Image spaceCooldown;
 
     protected virtual void Start()
     {
-    	ThisUI = Instantiate(userInterface);
+    	Instantiate(userInterface);
 		healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
         _health = maxHealth;
