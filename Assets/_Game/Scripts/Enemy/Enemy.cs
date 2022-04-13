@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable
         healthCanvas.transform.SetParent(transform);
         _healthBar = healthCanvas.GetComponentInChildren<Slider>();
         _healthBar.transform.localPosition = new Vector3(0, healthBarOffset, 0);
+        _health = maxHealth;
         
         _target = GameObject.FindWithTag("Player").transform;
 
@@ -60,8 +61,6 @@ public class Enemy : MonoBehaviour, IDamageable
         _agent.updateUpAxis = false;
         _agent.speed = defaultWalkSpeed;
         _agent.enabled = false;
-
-        _health = maxHealth;
     }
 
     protected virtual void Update()
@@ -78,7 +77,7 @@ public class Enemy : MonoBehaviour, IDamageable
             _agent.enabled = true;
             FirstEncounter();
         }
-        else
+        else if(!_agent.enabled)
             return;
         
         if (_inCC)

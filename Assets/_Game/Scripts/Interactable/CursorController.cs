@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    private Camera _camera;
+    internal Camera _camera;
 
     [SerializeField] private LayerMask interactableLayerMask;
     // Start is called before the first frame update

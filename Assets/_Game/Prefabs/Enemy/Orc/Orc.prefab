@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
-  _inCC: 0
   chaseRange: 2
   attackRange: 4
+  detectionRange: 10
   defaultWalkSpeed: 2
   maxHealth: 300
   healthCanvas: {fileID: 2956869105520665669, guid: 7225e7b58c059c24a99163da7a667da4, type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
   attackRate: 20
   swordPrefab: {fileID: 4648420519848117709, guid: a55caf470b03971438072828d830b631, type: 3}
   swordDamage: 20
-  hero: {fileID: 6879499110739928273, guid: 00960cb9888eaa146b2e6e6f90698872, type: 3}
+  hero: {fileID: 310103054564883480, guid: 9ba2fe366b5d160489562ffaa746b921, type: 3}
   _event: {fileID: 0}
 --- !u!195 &8114833624958082130
 NavMeshAgent:

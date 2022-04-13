@@ -49,5 +49,7 @@ public class GameManager : MonoBehaviour
     {
         var cinemachine = Camera.main.transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
         cinemachine.Follow = player.transform;
+        
+        GetComponent<CursorController>()._camera = Camera.main;
     }
 }
