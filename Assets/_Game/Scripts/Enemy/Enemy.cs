@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Transform _transform;
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    internal Animator _animator;
 
     [Header("Movement")]
     [SerializeField] protected float chaseRange = 5f;
@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     [Header("Hero")]
     [SerializeField] public GameObject hero;
+    [SerializeField] public GameObject enemy;
 
     [Header("Event")]
     public Event _event = null;

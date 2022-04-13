@@ -821,6 +821,10 @@ PrefabInstance:
       value: Game Manager
       objectReference: {fileID: 0}
     - target: {fileID: 4992943191869359782, guid: 2b145e6dc41484245826a723f948ae1c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 310103054564883480, guid: 9ba2fe366b5d160489562ffaa746b921, type: 3}
+    - target: {fileID: 4992943191869359782, guid: 2b145e6dc41484245826a723f948ae1c, type: 3}
       propertyPath: followCamera
       value: 
       objectReference: {fileID: 979742076}
@@ -1316,7 +1320,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8379207, y: 1}
+    m_SensorSize: {x: 1.7782102, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

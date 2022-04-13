@@ -160,6 +160,7 @@ MonoBehaviour:
   maxHealth: 100
   healthRegen: 1
   healthRegenCooldown: 3
+  enemy: {fileID: 6371360691702374924, guid: ffcbdace1e0d2a747b68a6dda8ba89b6, type: 3}
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15

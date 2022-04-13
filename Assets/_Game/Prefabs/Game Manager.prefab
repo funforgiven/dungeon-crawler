@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
   spawnPosition: {x: 0, y: 0}
+  respawnSword: {fileID: 4392246075500739123, guid: 631e0d5da156e26408b4121d15555bee, type: 3}
 --- !u!114 &5601872129422926158
 MonoBehaviour:
   m_ObjectHideFlags: 0

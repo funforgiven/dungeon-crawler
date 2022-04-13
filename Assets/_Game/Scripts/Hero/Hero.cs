@@ -28,6 +28,7 @@ public class Hero : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float healthRegen = 1f;
     [SerializeField] private float healthRegenCooldown = 3f;
+    [SerializeField] public GameObject enemy;
     private float _healthRegenCurrentCooldown = 0f;
     protected float _health;
     private Slider healthBar;
