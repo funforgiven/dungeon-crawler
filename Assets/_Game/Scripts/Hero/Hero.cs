@@ -46,7 +46,6 @@ public class Hero : MonoBehaviour, IDamageable
     protected StabState _stabState;
 
     [Header("UI")]
-    [SerializeField] protected GameObject userInterface;
     [SerializeField] protected Image qDuration;
     [SerializeField] protected Image qCooldown;
     [SerializeField] protected Image eDuration;
@@ -60,8 +59,7 @@ public class Hero : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-    	Instantiate(userInterface);
-		healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
+        healthBar = GameObject.FindWithTag("HPBar").GetComponent<Slider>();
 
         _health = maxHealth;
 		walkSpeed = defaultWalkSpeed;
@@ -180,6 +178,6 @@ public class Hero : MonoBehaviour, IDamageable
     public void OnDeath(GameObject killer)
     {
         GameManager.Instance.player = killer.GetComponent<Enemy>().hero;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Death");
     }
 }

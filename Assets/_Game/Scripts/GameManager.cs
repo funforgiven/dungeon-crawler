@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,14 +31,21 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (SceneManager.GetActiveScene().name == "Tutorial map1") return;
-        StartGame();
+        if (SceneManager.GetActiveScene().name == "Tutorial map1")
+            StartGame();
+        else if (SceneManager.GetActiveScene().name == "Death")
+            StartDeathScene();
     }
     
     private void StartGame()
     {
         SpawnPlayer();
         AttachCamera();
+    }
+
+    private void StartDeathScene()
+    {
+        SpawnPlayer();
     }
 
     private void SpawnPlayer()
@@ -52,4 +60,5 @@ public class GameManager : MonoBehaviour
         
         GetComponent<CursorController>()._camera = Camera.main;
     }
+    
 }
