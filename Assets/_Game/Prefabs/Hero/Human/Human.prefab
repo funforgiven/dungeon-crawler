@@ -294,12 +294,20 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1970323472942733138, guid: cfd287232a8babc42802db19e8478152, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6822872160841099662, guid: cfd287232a8babc42802db19e8478152, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6822872160841099662, guid: cfd287232a8babc42802db19e8478152, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219158414286814356, guid: cfd287232a8babc42802db19e8478152, type: 3}
+      propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8193925954460075300, guid: cfd287232a8babc42802db19e8478152, type: 3}

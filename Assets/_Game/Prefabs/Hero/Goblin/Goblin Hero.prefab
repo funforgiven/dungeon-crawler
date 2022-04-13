@@ -215,6 +215,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5313717250958233488}
     m_Modifications:
+    - target: {fileID: 3031991626717343170, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789288279996772287, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263549038853316872, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8453364889026819139, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
       propertyPath: m_Name
       value: Goblin UI
@@ -317,6 +329,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8453364890051553004, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850627170099959268, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
+      propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
