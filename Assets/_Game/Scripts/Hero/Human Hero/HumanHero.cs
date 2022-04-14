@@ -38,7 +38,7 @@ public class HumanHero : Hero
     [SerializeField] private float stabCooldown = 3f;
     [SerializeField] private float stabTime = 1f;
     [SerializeField] private float stabSpeed = 3f;
-    
+
     private float _stabCurrentTime;
     private float _stabCurrentCooldown;
 
@@ -53,7 +53,7 @@ public class HumanHero : Hero
     protected override void Update()
     {
         base.Update();
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             sword.Attack();
@@ -68,7 +68,7 @@ public class HumanHero : Hero
                 if(Input.GetKeyDown(KeyCode.Mouse1) && _dashState != DashState.Dashing)
                 {
                     _savedVelocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-                    
+
                     sword.Enable();
                     var rotZ = Mathf.Atan2(_savedVelocity.y, _savedVelocity.x) * Mathf.Rad2Deg;
                     sword.transform.rotation = Quaternion.Euler(0, 0, rotZ - 90f);
@@ -78,6 +78,7 @@ public class HumanHero : Hero
                 break;
             case StabState.Stabbing:
                 _stabCurrentTime += Time.deltaTime;
+
                 if(_stabCurrentTime >= stabTime)
                 {
                     sword.Disable();
@@ -87,6 +88,7 @@ public class HumanHero : Hero
                 break;
             case StabState.Cooldown:
                 _stabCurrentCooldown += Time.deltaTime;
+                rcCooldown.fillAmount = (stabCooldown - _stabCurrentCooldown) / stabCooldown;
                 if(_stabCurrentCooldown >= stabCooldown)
                 {
                     _stabCurrentCooldown = 0f;
@@ -98,6 +100,7 @@ public class HumanHero : Hero
         if (_manaShieldOnCooldown)
         {
             _manaShieldCurrentCooldown += Time.deltaTime;
+            eCooldown.fillAmount = (manaShieldCooldown - _manaShieldCurrentCooldown) / manaShieldCooldown;
 
             if (_manaShieldCurrentCooldown >= manaShieldCooldown)
             {
@@ -184,7 +187,7 @@ public class HumanHero : Hero
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+
         if(_stabState == StabState.Stabbing)
             _rigidbody.velocity = _savedVelocity.normalized * stabSpeed;
     }

@@ -168,8 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  damage: 5
-  explosionDamage: 5
+  damage: 10
+  explosionDamage: 7
   chargeTime: 3
-  owner: {fileID: 0}
   target: {fileID: 0}

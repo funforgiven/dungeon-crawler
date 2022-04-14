@@ -98,6 +98,7 @@ public class ImpHero : Hero
         if (_fireSwordOnCooldown)
         {
             _fireSwordCurrentCooldown += Time.deltaTime;
+            rcCooldown.fillAmount = (fireSwordCooldown - _fireSwordCurrentCooldown) / fireSwordCooldown;
 
             if (_fireSwordCurrentCooldown > fireSwordCooldown)
             {
@@ -126,6 +127,7 @@ public class ImpHero : Hero
         if (_fireballOnCooldown)
         {
             _fireballCurrentCooldown += Time.deltaTime;
+            qCooldown.fillAmount = (fireballCooldown - _fireballCurrentCooldown) / fireballCooldown;
 
             if (_fireballCurrentCooldown > fireballCooldown)
             {
@@ -151,6 +153,7 @@ public class ImpHero : Hero
         if (_flameBarrierOnCooldown)
         {
             _flameBarrierCurrentCooldown += Time.deltaTime;
+            eCooldown.fillAmount = (flameBarrierCooldown - _flameBarrierCurrentCooldown) / flameBarrierCooldown;
 
             if (_flameBarrierCurrentCooldown > flameBarrierCooldown)
             {
@@ -191,7 +194,7 @@ public class ImpHero : Hero
         if (_bigFireballOnCooldown)
         {
             _bigFireballCurrentCooldown += Time.deltaTime;
-
+rCooldown.fillAmount = (bigFireballCooldown - _bigFireballCurrentCooldown) / bigFireballCooldown;
 
             if (_bigFireballCurrentCooldown > bigFireballCooldown)
             {

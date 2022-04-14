@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class ShriekHero : Hero
 {
     internal List<Enemy> _markedEnemies = new List<Enemy>();
-    
+
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 1.5f;
     [SerializeField] private float sprintDuration = 4f;
@@ -19,11 +19,12 @@ public class ShriekHero : Hero
     private float _sprintCurrentCooldown = 0f;
     private float _sprintCurrentDuration = 0f;
 
-    [Header("AoE")] 
+    [Header("AoE")]
     [SerializeField] private float aoeDamage = 10f;
     [SerializeField] private float aoeDamageRadius = 3f;
     [SerializeField] private float aoeCooldown = 5f;
     [SerializeField] private LayerMask aoeDamageLayer;
+    [SerializeField] private GameObject AOESprite;
     private bool _aoeOnCooldown = false;
     private float _aoeCurrentCooldown = 0f;
 
@@ -34,7 +35,7 @@ public class ShriekHero : Hero
     private bool _fearOnCooldown = false;
     private float _fearCurrentCooldown = 0f;
 
-    [Header("Curse")] 
+    [Header("Curse")]
     [SerializeField] private float curseDamage = 5f;
     [SerializeField] private float curseCooldown = 5f;
     [SerializeField] private float curseDuration = 2f;
@@ -48,12 +49,12 @@ public class ShriekHero : Hero
     protected override void Update()
     {
         base.Update();
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             sword.Attack("Mark");
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!_sprintOnCooldown)
@@ -61,7 +62,7 @@ public class ShriekHero : Hero
                 _sprintOnCooldown = true;
                 _sprintActive = true;
                 _sprintCurrentDuration = 0;
-                
+
                 walkSpeed = defaultWalkSpeed * sprintSpeed;
                 Physics2D.IgnoreLayerCollision(6, 7, true);
                 var col = _spriteRenderer.color;
@@ -72,22 +73,23 @@ public class ShriekHero : Hero
         if (_sprintActive)
         {
             _sprintCurrentDuration += Time.deltaTime;
+            qDuration.fillAmount = (sprintDuration - _sprintCurrentDuration) / sprintDuration;
             if (_sprintCurrentDuration > sprintDuration)
             {
                 _sprintActive = false;
-                
+
                 walkSpeed = defaultWalkSpeed;
                 Physics2D.IgnoreLayerCollision(6, 7, false);
                 var col = _spriteRenderer.color;
                 _spriteRenderer.color = new Color(col.r, col.b, col.g, 1);
             }
         }
-            
-        
+
+
         if (_sprintOnCooldown)
         {
             _sprintCurrentCooldown += Time.deltaTime;
-
+            qCooldown.fillAmount = (sprintCooldown - _sprintCurrentCooldown) / sprintCooldown;
             if (_sprintCurrentCooldown > sprintCooldown)
             {
                 _sprintCurrentCooldown = 0;
@@ -100,9 +102,9 @@ public class ShriekHero : Hero
             if (!_aoeOnCooldown)
             {
                 _aoeOnCooldown = true;
-                
-                var overlap = Physics2D.OverlapCircleAll(transform.position, aoeDamageRadius, aoeDamageLayer);
 
+                var overlap = Physics2D.OverlapCircleAll(transform.position, aoeDamageRadius, aoeDamageLayer);
+                  Instantiate(AOESprite, transform.position, Quaternion.identity);
                 foreach (var col in overlap)
                 {
                     var damageable = col.GetComponent<IDamageable>();
@@ -114,6 +116,7 @@ public class ShriekHero : Hero
         if (_aoeOnCooldown)
         {
             _aoeCurrentCooldown += Time.deltaTime;
+            rcCooldown.fillAmount = (aoeCooldown - _aoeCurrentCooldown) / aoeCooldown;
 
             if (_aoeCurrentCooldown > aoeCooldown)
             {
@@ -121,8 +124,8 @@ public class ShriekHero : Hero
                 _aoeOnCooldown = false;
             }
         }
-        
-        
+
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!_fearOnCooldown)
@@ -130,7 +133,7 @@ public class ShriekHero : Hero
                 if (_markedEnemies.Count > 0)
                 {
                     _fearOnCooldown = true;
-                    
+
                     foreach (var enemy in _markedEnemies)
                     {
                         StartCoroutine(Fear(enemy));
@@ -140,10 +143,11 @@ public class ShriekHero : Hero
                 }
             }
         }
-        
+
         if (_fearOnCooldown)
         {
             _fearCurrentCooldown += Time.deltaTime;
+            eCooldown.fillAmount = (fearCooldown - _fearCurrentCooldown) / fearCooldown;
 
             if (_fearCurrentCooldown > fearCooldown)
             {
@@ -151,7 +155,7 @@ public class ShriekHero : Hero
                 _fearOnCooldown = false;
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (!_curseOnCooldown)
@@ -159,25 +163,27 @@ public class ShriekHero : Hero
                 _curseOnCooldown = true;
                 _curseActive = true;
                 _curseCurrentDuration = 0;
-                
+
                 _cursedEnemies.AddRange(_markedEnemies);
                 _markedEnemies = new List<Enemy>();
             }
         }
-        
+
         if (_curseActive)
         {
             _curseCurrentDuration += Time.deltaTime;
+            rDuration.fillAmount = (curseDuration - _curseCurrentDuration) / curseDuration;
             if (_curseCurrentDuration > curseDuration)
             {
                 _curseActive = false;
                 _cursedEnemies = new List<Enemy>();
             }
         }
-        
+
         if (_curseOnCooldown)
         {
             _curseCurrentCooldown += Time.deltaTime;
+            rCooldown.fillAmount = (curseCooldown - _curseCurrentCooldown) / curseCooldown;
 
             if (_curseCurrentCooldown > curseCooldown)
             {
@@ -194,10 +200,10 @@ public class ShriekHero : Hero
 
         NavMeshHit hit;
         NavMesh.SamplePosition(direction, out hit, fearMaxRange, 1);
-        
+
         enemy._inCC = true;
         enemy._agent.SetDestination(hit.position);
-        
+
         yield return new WaitForSeconds(fearDuration);
         enemy._inCC = false;
     }
@@ -207,8 +213,8 @@ public class ShriekHero : Hero
             base.ApplyDamage(enemy, identifier, swordDamage + curseDamage);
         else
             base.ApplyDamage(enemy, identifier, damage, damageType);
-        
-        
+
+
         if (identifier == "Mark")
         {
             if(!_markedEnemies.Contains(enemy))

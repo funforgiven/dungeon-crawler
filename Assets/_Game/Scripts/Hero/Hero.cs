@@ -31,7 +31,7 @@ public class Hero : MonoBehaviour, IDamageable
     [SerializeField] public GameObject enemy;
     private float _healthRegenCurrentCooldown = 0f;
     protected float _health;
-    private Slider healthBar;
+    [SerializeField] private Slider healthBar;
     private bool isDead = false;
 
     [Header("Dash")]
@@ -108,6 +108,7 @@ public class Hero : MonoBehaviour, IDamageable
                 break;
             case DashState.Dashing:
                 _dashCurrentTime += Time.deltaTime;
+          //      spaceDuration.fillAmount = (dashTime - _dashCurrentTime) / dashTime;
                 if(_dashCurrentTime >= dashTime)
                 {
                     sword.Disable();
@@ -117,6 +118,7 @@ public class Hero : MonoBehaviour, IDamageable
                 break;
             case DashState.Cooldown:
                 _dashCurrentCooldown += Time.deltaTime;
+                spaceCooldown.fillAmount = (dashCooldown - _dashCurrentCooldown) / dashCooldown;
                 if(_dashCurrentCooldown >= dashCooldown)
                 {
                     _dashCurrentCooldown = 0f;

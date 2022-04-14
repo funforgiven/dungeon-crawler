@@ -125,14 +125,13 @@ MonoBehaviour:
   attackRange: 4
   detectionRange: 10
   defaultWalkSpeed: 2
-  maxHealth: 300
+  maxHealth: 175
   healthCanvas: {fileID: 2956869105520665669, guid: 7225e7b58c059c24a99163da7a667da4, type: 3}
   healthBarOffset: 35
   attackRate: 20
   swordPrefab: {fileID: 4648420519848117709, guid: a55caf470b03971438072828d830b631, type: 3}
   swordDamage: 20
   hero: {fileID: 310103054564883480, guid: 9ba2fe366b5d160489562ffaa746b921, type: 3}
-  enemy: {fileID: 4571493246632053440}
   _event: {fileID: 0}
 --- !u!195 &8114833624958082130
 NavMeshAgent:

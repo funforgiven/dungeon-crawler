@@ -133,12 +133,13 @@ MonoBehaviour:
   swordDamage: 0
   hero: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
   _event: {fileID: 0}
-  aoeDamage: 15
-  aoeDamageRadius: 3
+  aoeDamage: 10
+  aoeDamageRadius: 2
   aoeDamageLayer:
     serializedVersion: 2
     m_Bits: 64
   chaseRangeOffset: 0
+  AOEAttack: {fileID: 2804117075211795150, guid: 9d14a939f39b07c438ab2aaabf2f9f8b, type: 3}
   dodgeDuration: 5
   dodgeCharge: 2
 --- !u!195 &1654767487750549608

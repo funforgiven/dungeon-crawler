@@ -161,6 +161,7 @@ MonoBehaviour:
   healthRegen: 1
   healthRegenCooldown: 3
   enemy: {fileID: 6371360691702374924, guid: ffcbdace1e0d2a747b68a6dda8ba89b6, type: 3}
+  healthBar: {fileID: 4316214255214159924}
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15
@@ -315,6 +316,10 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2284205999410199592, guid: fd27177b302fb2c4588210994842227d, type: 3}
+      propertyPath: m_FillMethod
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4346024624948467166, guid: fd27177b302fb2c4588210994842227d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -335,17 +340,33 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5858849587951415337, guid: fd27177b302fb2c4588210994842227d, type: 3}
+      propertyPath: m_FillMethod
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7280133519230165195, guid: fd27177b302fb2c4588210994842227d, type: 3}
       propertyPath: m_FillAmount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280133519230165195, guid: fd27177b302fb2c4588210994842227d, type: 3}
+      propertyPath: m_FillMethod
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7369353938462657098, guid: fd27177b302fb2c4588210994842227d, type: 3}
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7369353938462657098, guid: fd27177b302fb2c4588210994842227d, type: 3}
+      propertyPath: m_FillMethod
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8386025795251952823, guid: fd27177b302fb2c4588210994842227d, type: 3}
       propertyPath: m_FillAmount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386025795251952823, guid: fd27177b302fb2c4588210994842227d, type: 3}
+      propertyPath: m_FillMethod
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8453364889026819139, guid: fd27177b302fb2c4588210994842227d, type: 3}
       propertyPath: m_Name
@@ -499,6 +520,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4316214255214159924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8453364889137729596, guid: fd27177b302fb2c4588210994842227d, type: 3}
+  m_PrefabInstance: {fileID: 5671764121726760968}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &4316214255380057159 stripped

@@ -9,6 +9,7 @@ public class Shriek : Enemy
     [SerializeField] private float aoeDamageRadius = 3f;
     [SerializeField] private LayerMask aoeDamageLayer;
     [SerializeField] private float chaseRangeOffset;
+    [SerializeField] private GameObject AOEAttack;
 
     [Header("Dodge")]
     [SerializeField] private float dodgeDuration = 5f;
@@ -17,7 +18,7 @@ public class Shriek : Enemy
     private float _dodgeCurrentDuration = 0f;
     private int _dodgeCurrentCharge = 0;
     private bool _firstDamage = true;
-    
+
 
 
     protected override void Start()
@@ -31,11 +32,12 @@ public class Shriek : Enemy
     protected override void Update()
     {
         base.Update();
-        
+
         _attackTimeElapsed += Time.deltaTime;
-        
+
         if (_isAttacking && _attackTimeElapsed > 60 / attackRate)
         {
+
             _attackTimeElapsed = 0;
 
             var overlap = Physics2D.OverlapCircleAll(transform.position, aoeDamageRadius, aoeDamageLayer);
@@ -45,6 +47,7 @@ public class Shriek : Enemy
                 var damageable = col.GetComponent<IDamageable>();
                 if(damageable != null) damageable.TakeDamage(aoeDamage, gameObject, DamageType.Magical);
             }
+            Instantiate(AOEAttack, transform.position, Quaternion.identity);
         }
 
         if (_dodgeActive)
@@ -55,7 +58,7 @@ public class Shriek : Enemy
                 _dodgeActive = false;
             }
         }
-        
+
     }
 
     public override void TakeDamage(float damage, GameObject damager, DamageType damageType)
@@ -69,7 +72,7 @@ public class Shriek : Enemy
 
             return;
         }
-        
+
         if (_firstDamage)
         {
             _dodgeActive = true;
@@ -78,7 +81,7 @@ public class Shriek : Enemy
 
             _firstDamage = false;
         }
-        
+
         base.TakeDamage(damage, damager, damageType);
     }
 }

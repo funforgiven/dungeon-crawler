@@ -180,6 +180,7 @@ MonoBehaviour:
   healthRegen: 1
   healthRegenCooldown: 3
   enemy: {fileID: 318028769489470910, guid: 65b873f7241cf894abfc468f841ef04a, type: 3}
+  healthBar: {fileID: 1482125755460899530}
   dashCooldown: 5
   dashTime: 0.2
   dashSpeed: 15
@@ -193,7 +194,7 @@ MonoBehaviour:
   rcCooldown: {fileID: 5032461056266207516}
   spaceDuration: {fileID: 0}
   spaceCooldown: {fileID: 6088195806005402020}
-  poisonDamage: 3
+  poisonDamage: 20
   poisonDuration: 4
   poisonInterval: 2
   coatCooldown: 12
@@ -343,6 +344,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8453364889026819151, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
   m_PrefabInstance: {fileID: 7044178549533836022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1482125755460899530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8453364889137729596, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
+  m_PrefabInstance: {fileID: 7044178549533836022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1950706892869113618 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8850627170099959268, guid: 36ec8ec8bcb27d147908a5743d46dcb9, type: 3}
