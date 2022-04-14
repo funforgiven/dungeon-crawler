@@ -59,7 +59,7 @@ public class HumanHero : Hero
             sword.Attack();
         }
 
-        mana += Time.deltaTime * manaRegen;
+        mana = Mathf.Clamp(mana + Time.deltaTime * manaRegen, 0, maxMana);
         manaBar.value = mana / maxMana;
 
         switch (_stabState)

@@ -90,7 +90,7 @@ public class Hero : MonoBehaviour, IDamageable
 
         if (_healthRegenCurrentCooldown > healthRegenCooldown)
         {
-            _health += Time.deltaTime * healthRegen;
+            _health = Mathf.Clamp(_health + Time.deltaTime * healthRegen, 0, maxHealth);
         }
 
         switch (_dashState)
