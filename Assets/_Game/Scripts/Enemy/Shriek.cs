@@ -14,17 +14,21 @@ public class Shriek : Enemy
     [Header("Dodge")]
     [SerializeField] private float dodgeDuration = 5f;
     [SerializeField] private int dodgeCharge = 2;
+    [SerializeField] [Range(0, 1)] private float dodgeOpacity = 0.5f;
     private bool _dodgeActive;
     private float _dodgeCurrentDuration = 0f;
     private int _dodgeCurrentCharge = 0;
     private bool _firstDamage = true;
 
+    private SpriteRenderer _spriteRenderer;
+    
 
 
     protected override void Start()
     {
         base.Start();
 
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         attackRange = aoeDamageRadius;
         chaseRange = attackRange - chaseRangeOffset;
     }
@@ -56,6 +60,8 @@ public class Shriek : Enemy
             if (_dodgeCurrentDuration > dodgeDuration)
             {
                 _dodgeActive = false;
+                var col = _spriteRenderer.color;
+                _spriteRenderer.color = new Color(col.r, col.b, col.g, 1);
             }
         }
 
@@ -68,20 +74,26 @@ public class Shriek : Enemy
             _dodgeCurrentCharge -= 1;
 
             if (_dodgeCurrentCharge == 0)
+            {
                 _dodgeActive = false;
+                var col = _spriteRenderer.color;
+                _spriteRenderer.color = new Color(col.r, col.b, col.g, 1);
+            }
 
             return;
         }
-
+        
         if (_firstDamage)
         {
             _dodgeActive = true;
             _dodgeCurrentDuration = 0;
             _dodgeCurrentCharge = dodgeCharge;
-
+            var col = _spriteRenderer.color;
+            _spriteRenderer.color = new Color(col.r, col.b, col.g, dodgeOpacity);
+            
             _firstDamage = false;
         }
-
+        
         base.TakeDamage(damage, damager, damageType);
     }
 }
