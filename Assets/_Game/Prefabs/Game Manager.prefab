@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7336631846760551367, guid: 96ce9f0377396054d845bb7382631ddc, type: 3}
-  spawnPosition: {x: 0, y: 0}
+  spawnPosition: {x: 5, y: 3}
   respawnSword: {fileID: 4392246075500739123, guid: 631e0d5da156e26408b4121d15555bee, type: 3}
 --- !u!114 &5601872129422926158
 MonoBehaviour:
