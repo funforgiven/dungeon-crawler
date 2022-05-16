@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public static class DungeonUtility
 {
-    public static List<BoundsInt> BSP(BoundsInt area, int minWidth, int minHeight)
+    public static List<BoundsInt> BSP(BoundsInt area, int minWidth, int minHeight, int maxRooms, float discardSizeMultiplier)
     {
         List<BoundsInt> rooms = new List<BoundsInt>();
         
@@ -14,8 +14,11 @@ public static class DungeonUtility
 
         while (roomQueue.Count > 0)
         {
+            if (rooms.Count >= maxRooms)
+                return rooms;
+            
             var room = roomQueue.Dequeue();
-            if(room.size.x >= minWidth*2 && room.size.y >= minHeight*2)
+            if(room.size.x >= minWidth*discardSizeMultiplier && room.size.y >= minHeight*discardSizeMultiplier)
             {
                 if (Random.value <= 0.5f)
                 {
@@ -63,4 +66,29 @@ public static class DungeonUtility
         roomQueue.Enqueue(room1);
         roomQueue.Enqueue(room2);
     }
+
+    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPos, int length)
+    {
+        var result = new HashSet<Vector2Int>();
+        
+        result.Add(startPos);
+        var prevPos = startPos;
+
+        for (int i = 0; i < length; i++)
+        {
+            var newPos = prevPos + directions[Random.Range(0, directions.Count)];
+            result.Add(newPos);
+            prevPos = newPos;
+        }
+
+        return result;
+    }
+    
+    private static List<Vector2Int> directions = new List<Vector2Int>()
+    {
+        new Vector2Int(1, 0),
+        new Vector2Int(-1, 0),
+        new Vector2Int(0, 1),
+        new Vector2Int(0, -1)
+    };
 }
