@@ -598,7 +598,7 @@ MonoBehaviour:
   maxRooms: 8
   discardSizeMultiplier: 1.7
   roomWalkLength: 20
-  roomWalkIteration: 75
+  roomWalkIteration: 80
   offset: 2
 --- !u!4 &1096634599
 Transform:
