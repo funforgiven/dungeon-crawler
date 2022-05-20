@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public static class DungeonUtility
 {
-    public static List<BoundsInt> BSP(BoundsInt area, int minWidth, int minHeight, int maxRooms, float discardSizeMultiplier)
+    public static List<BoundsInt> BSP(BoundsInt area, int minWidth, int minHeight, int maxWidth, int maxHeight, int maxRooms)
     {
         List<BoundsInt> rooms = new List<BoundsInt>();
         
@@ -18,7 +18,7 @@ public static class DungeonUtility
                 return rooms;
             
             var room = roomQueue.Dequeue();
-            if(room.size.x >= minWidth*discardSizeMultiplier && room.size.y >= minHeight*discardSizeMultiplier)
+            if(room.size.x >= maxWidth && room.size.y >= maxHeight)
             {
                 if (Random.value <= 0.5f)
                 {

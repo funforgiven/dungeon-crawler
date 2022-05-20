@@ -12,13 +12,14 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private TileBase wallTile;
     
     [Header("Binary Space Partition")]
-    [SerializeField] private int roomMinWidth = 20;
-    [SerializeField] private int roomMinHeight = 20;
     [SerializeField] private int dungeonWidth = 200;
     [SerializeField] private int dungeonHeight = 200;
+    [SerializeField] private int roomMinWidth = 20;
+    [SerializeField] private int roomMinHeight = 20;
+    [SerializeField] private int roomMaxWidth = 35;
+    [SerializeField] private int roomMaxHeight = 35;
     [SerializeField] private int maxRooms = 8;
-    [SerializeField] private float discardSizeMultiplier = 2f;
-    
+
     [Header("Random Walk")]
     [SerializeField] private int roomWalkLength = 150;
     [SerializeField] private int roomWalkIteration = 6;
@@ -36,7 +37,7 @@ public class DungeonManager : MonoBehaviour
     {
         var size = new Vector3Int(dungeonWidth, dungeonHeight, 0);
         var dungeon = new BoundsInt(startPosition, size);
-        var roomBounds = DungeonUtility.BSP(dungeon, roomMinWidth, roomMinHeight, maxRooms, discardSizeMultiplier);
+        var roomBounds = DungeonUtility.BSP(dungeon, roomMinWidth, roomMinHeight, roomMaxWidth, roomMaxHeight, maxRooms);
 
         // All Room Tiles
         var roomTiles = CreateRooms(roomBounds); // This adds room tiles for each room into the _rooms dictionary.
