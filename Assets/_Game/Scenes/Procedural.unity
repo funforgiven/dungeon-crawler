@@ -589,8 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0, z: 0}
   tilemap: {fileID: 1226913348}
-  floorTile: {fileID: 11400000, guid: efb2687cdd736104c85da32dbe98e8ab, type: 2}
-  wallTile: {fileID: 11400000, guid: e61e2ba5dbd9f66479ab68645401baa2, type: 2}
+  tile: {fileID: 11400000, guid: e61e2ba5dbd9f66479ab68645401baa2, type: 2}
   dungeonWidth: 140
   dungeonHeight: 140
   roomMinWidth: 20

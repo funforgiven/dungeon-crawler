@@ -8,8 +8,7 @@ public class DungeonManager : MonoBehaviour
 {
     [SerializeField] private Vector3Int startPosition = new Vector3Int(0, 0, 0);
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private TileBase floorTile;
-    [SerializeField] private TileBase wallTile;
+    [SerializeField] private TileBase tile;
     
     [Header("Binary Space Partition")]
     [SerializeField] private int dungeonWidth = 200;
@@ -53,8 +52,8 @@ public class DungeonManager : MonoBehaviour
         // All Wall Tiles
         var wallTiles = CreateWalls(floorTiles);
         
-        Paint(floorTiles, floorTile);
-        Paint(wallTiles, wallTile);
+        Paint(floorTiles, tile);
+        Paint(wallTiles, tile);
     }
 
     private HashSet<Vector2Int> CreateRooms(List<BoundsInt> rooms)
