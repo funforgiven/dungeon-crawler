@@ -180,7 +180,6 @@ public class Hero : MonoBehaviour, IDamageable
 
     public void OnDeath(GameObject killer)
     {
-        GameManager.Instance.player = killer.GetComponent<Enemy>().hero;
-        SceneManager.LoadScene("Death");
+        DungeonManager.Instance.OnDeath(killer.GetComponent<Enemy>().hero);
     }
 }
