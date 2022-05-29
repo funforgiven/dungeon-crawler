@@ -135,8 +135,7 @@ GameObject:
   - component: {fileID: 258841488}
   - component: {fileID: 258841487}
   - component: {fileID: 258841489}
-  - component: {fileID: 258841486}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,22 +157,6 @@ Transform:
   m_Father: {fileID: 1087130912}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &258841486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258841484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!483693784 &258841487
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -233,15 +216,41 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: -6.5032875e-13
+      e01: 0
+      e02: -8.08168e-39
+      e03: -8.08168e-39
+      e10: 7.47e-43
+      e11: 0
+      e12: 7.47e-43
+      e13: 7.47e-43
+      e20: -4.1316513e-28
+      e21: 8e-45
+      e22: 6.5489755e-29
+      e23: 1.7060573e+29
+      e30: 4.5905e-41
+      e31: 0
+      e32: 7.48e-43
+      e33: 7.51e-43
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: 3.9382e-41, g: 3.9382e-41, b: 3.9382e-41, a: 3.9382e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: 7, y: -6, z: 0}
+  m_Size: {x: 39, y: 30, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -467,8 +476,8 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
-  m_UseGeometry: 1
-  m_OverrideByGrid: 1
+  m_UseGeometry: 0
+  m_OverrideByGrid: 0
   m_UseMeshPrefab: {fileID: 0}
   m_CompressBounds: 1
   m_OverrideVector: {x: 1, y: 1, z: 1}
@@ -481,7 +490,7 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 58c1b0b43aab13844b55901d1a03d644, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!4 &799485178
 Transform:
   m_ObjectHideFlags: 0
@@ -648,7 +657,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 258841488}
   wallTilemap: {fileID: 1557089732}
   tile: {fileID: 11400000, guid: e61e2ba5dbd9f66479ab68645401baa2, type: 2}
-  dummyTile: {fileID: 11400000, guid: 2ad9b8aa3723f1944a6d35971f5af13d, type: 2}
+  dummyTile: {fileID: 11400000, guid: e61e2ba5dbd9f66479ab68645401baa2, type: 2}
   navmesh: {fileID: 799485177}
   dungeonWidth: 140
   dungeonHeight: 140

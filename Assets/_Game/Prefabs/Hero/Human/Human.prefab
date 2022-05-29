@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 128004969411625493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2069799608247982297}
@@ -316,6 +316,10 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8453364888685526604, guid: cfd287232a8babc42802db19e8478152, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8453364889026819139, guid: cfd287232a8babc42802db19e8478152, type: 3}
       propertyPath: m_Name
       value: Human UI
@@ -412,6 +416,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8453364889889076344, guid: cfd287232a8babc42802db19e8478152, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8453364890051553004, guid: cfd287232a8babc42802db19e8478152, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -423,6 +431,10 @@ PrefabInstance:
     - target: {fileID: 8453364890428936244, guid: cfd287232a8babc42802db19e8478152, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453364890428936246, guid: cfd287232a8babc42802db19e8478152, type: 3}
+      propertyPath: m_Size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfd287232a8babc42802db19e8478152, type: 3}
