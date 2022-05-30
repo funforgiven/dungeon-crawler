@@ -18,8 +18,13 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private TileBase tile;
     [SerializeField] private TileBase dummyTile;
     [SerializeField] private NavMeshSurface2d navmesh;
+    [SerializeField] private float delay = 0.05f;
     private Dictionary<BoundsInt, HashSet<Vector2Int>> _rooms = new();
-    private HashSet<Vector2Int> _allTiles = new();
+    private HashSet<Vector2Int> allTiles = new();
+    private HashSet<Vector2Int> roomTiles = new();
+    private HashSet<Vector2Int> corridorTiles = new();
+    private HashSet<Vector2Int> wallTiles = new();
+    private HashSet<Vector2Int> corridor = new();
     
     [Header("Binary Space Partition")]
     [SerializeField] private int dungeonWidth = 200;
@@ -64,12 +69,12 @@ public class DungeonManager : MonoBehaviour
     
     void Start()
     {
-        StartGame();
+        StartCoroutine(StartGame());
     }
 
-    void StartGame()
+    IEnumerator StartGame()
     {
-        GenerateDungeon();
+        yield return GenerateDungeon();
         SpawnHero();
         SpawnEnemies();
     }
@@ -134,17 +139,17 @@ public class DungeonManager : MonoBehaviour
 
         SceneManager.LoadScene("Procedural");
     }
-    private void GenerateDungeon()
+    private IEnumerator GenerateDungeon()
     {
         var size = new Vector3Int(dungeonWidth, dungeonHeight, 0);
         var dungeon = new BoundsInt(startPosition, size);
         var roomBounds = DungeonUtility.BSP(dungeon, roomMinWidth, roomMinHeight, roomMaxWidth, roomMaxHeight, maxRooms);
 
         // All Room Tiles
-        var roomTiles = CreateRooms(roomBounds); // This adds room tiles for each room into the _rooms dictionary.
+        yield return CreateRooms(roomBounds);
         
         // All Corridor Tiles
-        var corridorTiles = CreateCorridors(); // Uses _rooms which is created by CreateRooms() function called before this.
+        yield return CreateCorridors();
         
         // All Room and Corridor Tiles
         var floorTiles = new HashSet<Vector2Int>();
@@ -152,21 +157,21 @@ public class DungeonManager : MonoBehaviour
         floorTiles.UnionWith(corridorTiles);
         
         // All Wall Tiles
-        var wallTiles = CreateWalls(floorTiles);
+        yield return CreateWalls(floorTiles);
         
         // All Tiles
-        _allTiles.UnionWith(floorTiles);
-        _allTiles.UnionWith(wallTiles);
+        allTiles.UnionWith(floorTiles);
+        allTiles.UnionWith(wallTiles);
 
-        Paint(_allTiles, tile, groundTilemap);
+        Paint(allTiles, tile, groundTilemap);
         Paint(wallTiles, dummyTile, wallTilemap);
         
         navmesh.BuildNavMesh();
     }
 
-    private HashSet<Vector2Int> CreateRooms(List<BoundsInt> rooms)
+    private IEnumerator CreateRooms(List<BoundsInt> rooms)
     {
-        var result = new HashSet<Vector2Int>();
+        roomTiles = new HashSet<Vector2Int>();
         
         foreach (var room in rooms)
         {
@@ -185,20 +190,21 @@ public class DungeonManager : MonoBehaviour
                         pos.y >= (room.yMin + offset) &&
                         pos.y <= (room.yMax - offset))
                         roomResult.Add(pos);
+                    
+                    Paint(roomResult, tile, groundTilemap);
+                    yield return new WaitForSeconds(delay);
                 }
 
                 position = roomResult.ElementAt(Random.Range(0, roomResult.Count));
             }
             
             _rooms.Add(room, roomResult);
-            result.UnionWith(roomResult);
+            roomTiles.UnionWith(roomResult);
         }
-
-        return result;
     }
-    private HashSet<Vector2Int> CreateCorridors()
+    private IEnumerator CreateCorridors()
     {
-        var corridors = new HashSet<Vector2Int>();
+        corridorTiles = new HashSet<Vector2Int>();
 
         var centers = _rooms.Keys.Select(room => Vector2Int.RoundToInt(room.center)).ToHashSet();
         var currentCenter = centers.ElementAt(Random.Range(0, centers.Count));
@@ -208,13 +214,11 @@ public class DungeonManager : MonoBehaviour
         {
             Vector2Int closest = FindClosestCenter(currentCenter, centers);
             centers.Remove(closest);
-            HashSet<Vector2Int> corridor = CreateCorridor(currentCenter, closest);
-            corridors.UnionWith(corridor);
+            yield return CreateCorridor(currentCenter, closest);
+            corridorTiles.UnionWith(corridor);
             
             currentCenter = closest;
         }
-
-        return corridors;
     }
 
     private Vector2Int FindClosestCenter(Vector2Int currentCenter, HashSet<Vector2Int> centers)
@@ -234,9 +238,9 @@ public class DungeonManager : MonoBehaviour
         return closest;
     }
     
-    private HashSet<Vector2Int> CreateCorridor(Vector2Int currentCenter, Vector2Int closest)
+    private IEnumerator CreateCorridor(Vector2Int currentCenter, Vector2Int closest)
     {
-        var corridor = new HashSet<Vector2Int>();
+        corridor = new HashSet<Vector2Int>();
         var pos = currentCenter;
         corridor.Add(pos);
 
@@ -251,6 +255,9 @@ public class DungeonManager : MonoBehaviour
                 pos += Vector2Int.down;
             }
             corridor.Add(pos);
+            
+            Paint(corridor, tile, groundTilemap);
+            yield return new WaitForSeconds(delay);
         }   
         
         while (pos.x != closest.x)
@@ -264,14 +271,14 @@ public class DungeonManager : MonoBehaviour
                 pos += Vector2Int.left;
             }
             corridor.Add(pos);
+            Paint(corridor, tile, groundTilemap);
+            yield return new WaitForSeconds(delay);
         }
-
-        return corridor;
     }
 
-    private HashSet<Vector2Int> CreateWalls(HashSet<Vector2Int> floorTiles)
+    private IEnumerator CreateWalls(HashSet<Vector2Int> floorTiles)
     {
-        var walls = new HashSet<Vector2Int>();
+        wallTiles = new HashSet<Vector2Int>();
 
         foreach (var pos in floorTiles)
         {
@@ -282,13 +289,14 @@ public class DungeonManager : MonoBehaviour
                     var nextPos = pos + new Vector2Int(i, k);
                     if (!floorTiles.Contains(nextPos))
                     {
-                        walls.Add(nextPos);
+                        wallTiles.Add(nextPos);
+                        Paint(wallTiles, tile, groundTilemap);
+                        Paint(wallTiles, dummyTile, wallTilemap);
+                        yield return new WaitForSeconds(delay);
                     }
                 }
             }
         }
-
-        return walls;
     }
 
     private void Paint(HashSet<Vector2Int> positions, TileBase tile, Tilemap tilemap)
