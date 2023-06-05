@@ -1,2 +1,2 @@
 # dungeon-crawler
-README coming soon...
+![Dungeon generation visualized](https://github.com/funforgiven/dungeon-crawler/blob/master/generation.gif)
